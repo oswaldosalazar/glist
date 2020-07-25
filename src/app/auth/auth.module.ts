@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
@@ -7,7 +9,8 @@ import { LandingComponent } from './landing/landing.component';
 @NgModule({
   declarations: [SignupComponent, LoginComponent, LandingComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     SignupComponent,
