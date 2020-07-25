@@ -4,8 +4,6 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
 
-
-
 @NgModule({
   declarations: [SignupComponent, LoginComponent, LandingComponent],
   imports: [
