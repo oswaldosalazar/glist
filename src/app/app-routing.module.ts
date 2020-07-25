@@ -9,7 +9,7 @@ import { LandingComponent } from './auth/landing/landing.component';
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'landing', component: LandingComponent }
+  { path: '', component: LandingComponent }
 ];
 
 @NgModule({
