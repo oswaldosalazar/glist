@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: [''],
-      password: ['']
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
     })
 
   }
@@ -43,19 +43,18 @@ export class LoginComponent implements OnInit {
   // }
 
   login(): void {
-    // if (this.loginForm && this.loginForm.valid) {
-    const email = this.loginForm.value.email;
-    const password = this.loginForm.value.password;
-    console.log(this.loginForm)
-    this.authService.login(email, password);
-    // this.router.navigate(['/']);
-
-
-    if (this.authService.redirectUrl) {
-      this.router.navigateByUrl(this.authService.redirectUrl);
-    } else {
+    if (this.loginForm && this.loginForm.valid) {
+      const email = this.loginForm.value.email;
+      const password = this.loginForm.value.password;
+      this.authService.login(email, password);
       this.router.navigate(['/']);
+
+
+      if (this.authService.redirectUrl) {
+        this.router.navigateByUrl(this.authService.redirectUrl);
+      } else {
+        this.router.navigate(['/']);
+      }
     }
-    // }
   }
 }

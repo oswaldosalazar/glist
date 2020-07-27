@@ -1,1 +1,112 @@
-<p>signup works!</p>
+<div>
+  <div>
+    <div>
+      {{ pageTitle }}
+    </div>
+
+    <div>
+      <form
+        class="needs-validation"
+        novalidate
+        (ngSubmit)="signup()"
+        [formGroup]="signupForm"
+        autocomplete="off"
+      >
+        <fieldset>
+          <div>
+            <label for="firstNameId">First Name</label>
+            <div class="col-md-8">
+              <input
+                class="form-control"
+                id="firstNameId"
+                type="text"
+                placeholder="First Name (required)"
+                formControlName="firstName"
+                required
+                name="firstName"
+              />
+              <div class="invalid-feedback">
+                First name is required.
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label for="lastNameId">Last Name</label>
+            <div class="col-md-8">
+              <input
+                class="form-control"
+                id="lastNameId"
+                type="text"
+                placeholder="Last Name"
+                formControlName="lastName"
+                required
+                name="lastName"
+              />
+              <div class="invalid-feedback">
+                Last name is optional.
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label for="emailId">Email</label>
+            <div class="col-md-8">
+              <input
+                class="form-control"
+                id="emailId"
+                type="email"
+                placeholder="Email (required)"
+                formControlName="email"
+                required
+                name="email"
+              />
+              <div class="invalid-feedback">
+                User name is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label" for="passwordId"
+              >Password</label
+            >
+            <div class="col-md-8">
+              <input
+                class="form-control"
+                id="passwordId"
+                type="password"
+                placeholder="Password (required)"
+                formControlName="password"
+                required
+                name="password"
+              />
+              <div class="invalid-feedback">
+                Password is required.
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div>
+              <span>
+                <button
+                  type="submit"
+                  style="width: 80px; margin-right: 10px;"
+                  [disabled]="!signupForm.valid"
+                >
+                  Sign Up
+                </button>
+              </span>
+              <span>
+                <a>
+                  Cancel
+                </a>
+              </span>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
