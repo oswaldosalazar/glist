@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { User } from './user';
+import { User } from './models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -18,12 +18,12 @@ export class AuthService {
     return !!this.currentUser;
   }
 
-  signup(newUser): void {
+  signup(user): void {
     const body = {
-      first_name: newUser.firstName,
-      last_name: newUser.lastName,
-      email: newUser.email,
-      passwd: newUser.password
+      first_name: user.firstName,
+      last_name: user.lastName,
+      email: user.email,
+      passwd: user.password
     };
 
     const headers = {
@@ -34,7 +34,7 @@ export class AuthService {
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     };
 
-    console.log(newUser)
+    console.log(user)
     this.http.post<any>(this.url, body, { headers }).subscribe(data => {
       console.log(data)
     })
