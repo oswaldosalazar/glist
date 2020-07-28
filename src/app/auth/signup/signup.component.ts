@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { AuthService } from '../auth.service';
 
+import { NewUser } from './../newUser';
 import * as UserActions from '../state/user.actions';
 import { getMaskUserName } from '../state/user.reducer';
-import { Observable } from 'rxjs';
+import { NullTemplateVisitor } from '@angular/compiler';
+
 
 @Component({
   selector: 'app-signup',
@@ -17,6 +20,12 @@ import { Observable } from 'rxjs';
 export class SignupComponent implements OnInit {
   pageTitle = 'Sign Up';
   signupForm: FormGroup;
+  newUser: NewUser = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
+  }
   passwordPattern = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
 
   maskUserName$: Observable<boolean>;
@@ -47,11 +56,11 @@ export class SignupComponent implements OnInit {
 
   signup(): void {
     if (this.signupForm && this.signupForm.valid) {
-      const firstName = this.signupForm.value.firstName;
-      const lastName = this.signupForm.value.lastName
-      const email = this.signupForm.value.email;
-      const password = this.signupForm.value.password;
-      this.authService.signup(firstName, lastName, email, password);
+      this.newUser.firstName = this.signupForm.value.firstName;
+      this.newUser.lastName = this.signupForm.value.lastName
+      this.newUser.email = this.signupForm.value.email;
+      this.newUser.password = this.signupForm.value.password;
+      this.authService.signup(this.newUser);
       this.router.navigate(['/']);
 
 
