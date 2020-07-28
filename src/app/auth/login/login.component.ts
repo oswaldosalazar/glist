@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 
+import { User } from './../models/user';
+
 /* NgRx */
 // import { Store } from '@ngrx/store';
 // import { State } from '../../state/app.state';
@@ -19,6 +21,7 @@ import { Observable } from 'rxjs';
 export class LoginComponent implements OnInit {
   pageTitle = 'Log In';
   loginForm: FormGroup;
+  user: User = new User();
 
   maskUserName$: Observable<boolean>;
 
@@ -42,19 +45,21 @@ export class LoginComponent implements OnInit {
   //   this.store.dispatch(UserActions.maskUserName());
   // }
 
-  login(): void {
+  onSubmit(): void {
+    const { email, password } = this.loginForm.value;
+
     if (this.loginForm && this.loginForm.valid) {
-      const email = this.loginForm.value.email;
-      const password = this.loginForm.value.password;
-      this.authService.login(email, password);
+      this.user = { email, password }
+
+      this.authService.login(this.user)
       this.router.navigate(['/']);
 
 
-      if (this.authService.redirectUrl) {
-        this.router.navigateByUrl(this.authService.redirectUrl);
-      } else {
-        this.router.navigate(['/']);
-      }
+      // if (this.authService.redirectUrl) {
+      //   this.router.navigateByUrl(this.authService.redirectUrl);
+      // } else {
+      //   this.router.navigate(['/']);
+      // }
     }
   }
 }

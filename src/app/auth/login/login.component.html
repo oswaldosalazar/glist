@@ -8,17 +8,17 @@
       <form
         class="needs-validation"
         novalidate
-        (ngSubmit)="login()"
+        (ngSubmit)="onSubmit()"
         [formGroup]="loginForm"
         autocomplete="off"
       >
         <fieldset>
           <div>
-            <label for="userId">Email</label>
+            <label for="emailId">Email</label>
             <div class="col-md-8">
               <input
                 class="form-control"
-                id="userId"
+                id="emailId"
                 type="email"
                 placeholder="Email (required)"
                 formControlName="email"

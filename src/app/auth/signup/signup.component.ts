@@ -1,4 +1,3 @@
-import { User } from './../models/user';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { AuthService } from '../auth.service';
 
+import { User } from './../models/user';
 import * as UserActions from '../state/user.actions';
 import { getMaskUserName } from '../state/user.reducer';
 import { NullTemplateVisitor } from '@angular/compiler';
@@ -52,16 +52,16 @@ export class SignupComponent implements OnInit {
     const { firstName, lastName, email, password } = this.signupForm.value;
 
     if (this.signupForm && this.signupForm.valid) {
-      this.user = { firstName, lastName, email, password }
+      this.user = { firstName, lastName, email, password };
 
       this.authService.signup(this.user);
       this.router.navigate(['/']);
 
-      if (this.authService.redirectUrl) {
-        this.router.navigateByUrl(this.authService.redirectUrl);
-      } else {
-        this.router.navigate(['/']);
-      }
+      // if (this.authService.redirectUrl) {
+      //   this.router.navigateByUrl(this.authService.redirectUrl);
+      // } else {
+      //   this.router.navigate(['/']);
+      // }
     }
 
     console.log(this.signupForm)
