@@ -1,4 +1,8 @@
-/* NgRx */
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
-export const maskUserName = createAction('[User] Mask User Name');
+import { User } from '../models/user';
+
+export const login = createAction('[User] Login',
+  props<{ user: User }>()
+);
+

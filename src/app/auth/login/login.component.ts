@@ -7,15 +7,15 @@ import { AuthService } from '../auth.service';
 import { User } from './../models/user';
 
 /* NgRx */
-// import { Store } from '@ngrx/store';
-// import { State } from '../../state/app.state';
+import { Store } from '@ngrx/store';
+import { State } from './../../state/app.state';
 import * as UserActions from '../store/auth.actions';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: [ './login.component.css' ]
 })
 export class LoginComponent implements OnInit {
   pageTitle = 'Log In';
@@ -28,13 +28,14 @@ export class LoginComponent implements OnInit {
     // private store: Store<State>,
     private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
-  ) {}
+    private fb: FormBuilder,
+    private store: Store<State>
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      email: [ '', [ Validators.required, Validators.email ] ],
+      password: [ '', [ Validators.required ] ]
     });
   }
 
@@ -42,20 +43,23 @@ export class LoginComponent implements OnInit {
   //   this.store.dispatch(UserActions.maskUserName());
   // }
 
-  onSubmit(): void {
+  onSubmit(user: User): void {
     const { email, password } = this.loginForm.value;
 
     if (this.loginForm && this.loginForm.valid) {
-      this.user = { email, password };
+      user = { email, password };
+
+      this.store.dispatch(UserActions.login({ user }));
 
       this.authService.login(this.user);
-      this.router.navigate(['/']);
 
-      // if (this.authService.redirectUrl) {
-      //   this.router.navigateByUrl(this.authService.redirectUrl);
-      // } else {
-      //   this.router.navigate(['/']);
-      // }
+      this.router.navigate([ '/' ]);
+
+      if (this.authService.redirectUrl) {
+        this.router.navigateByUrl(this.authService.redirectUrl);
+      } else {
+        this.router.navigate([ '/' ]);
+      }
     }
   }
 }
