@@ -9,8 +9,7 @@ import { User } from './../models/user';
 /* NgRx */
 // import { Store } from '@ngrx/store';
 // import { State } from '../../state/app.state';
-import * as UserActions from '../state/user.actions';
-import { getMaskUserName } from '../state/user.reducer';
+import * as UserActions from '../store/auth.actions';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -25,21 +24,19 @@ export class LoginComponent implements OnInit {
 
   maskUserName$: Observable<boolean>;
 
-
   constructor(
     // private store: Store<State>,
     private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
-    })
-
+    });
   }
-
 
   // checkChanged(): void {
   //   this.store.dispatch(UserActions.maskUserName());
@@ -49,11 +46,10 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.loginForm.value;
 
     if (this.loginForm && this.loginForm.valid) {
-      this.user = { email, password }
+      this.user = { email, password };
 
-      this.authService.login(this.user)
+      this.authService.login(this.user);
       this.router.navigate(['/']);
-
 
       // if (this.authService.redirectUrl) {
       //   this.router.navigateByUrl(this.authService.redirectUrl);

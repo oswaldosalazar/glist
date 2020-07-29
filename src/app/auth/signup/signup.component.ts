@@ -6,47 +6,51 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
 
 import { User } from './../models/user';
-import * as UserActions from '../state/user.actions';
-import { getMaskUserName } from '../state/user.reducer';
+import * as UserActions from '../store/auth.actions';
 import { NullTemplateVisitor } from '@angular/compiler';
-
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-
 export class SignupComponent implements OnInit {
   pageTitle = 'Sign Up';
   signupForm: FormGroup;
   user: User = new User();
 
-  passwordPattern = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
+  passwordPattern =
+    '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
 
   maskUserName$: Observable<boolean>;
-
 
   constructor(
     // private store: Store<State>,
     private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]]
-    })
-
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'
+          )
+        ]
+      ]
+    });
   }
 
   // checkChanged(): void {
   //   this.store.dispatch(UserActions.maskUserName());
   // }
-
 
   onSubmit(): void {
     const { firstName, lastName, email, password } = this.signupForm.value;
@@ -64,7 +68,7 @@ export class SignupComponent implements OnInit {
       // }
     }
 
-    console.log(this.signupForm)
+    console.log(this.signupForm);
     console.log(this.user);
   }
 }

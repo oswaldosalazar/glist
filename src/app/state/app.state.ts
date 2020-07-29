@@ -1,7 +1,7 @@
 // import { ProductState } from '../products/state/product.reducer';
-import { UserState } from '../auth/state/user.reducer';
+import * as auth from '../auth/store/auth.reducer';
 
-export interface State {
+export interface AppState {
   // products: ProductState;
-  user: UserState;
+  authState: auth.AuthState;
 }
