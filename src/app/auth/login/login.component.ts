@@ -43,11 +43,9 @@ export class LoginComponent implements OnInit {
   //   this.store.dispatch(UserActions.maskUserName());
   // }
 
-  onSubmit(user: User): void {
-    const { email, password } = this.loginForm.value;
-
+  onSubmit(): void {
     if (this.loginForm && this.loginForm.valid) {
-      user = { email, password };
+      const user = this.loginForm.value;
 
       this.store.dispatch(UserActions.login({ user }));
 
