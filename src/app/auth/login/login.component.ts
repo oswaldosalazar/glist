@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm && this.loginForm.valid) {
       const user = this.loginForm.value;
 
-      this.store.dispatch(UserActions.login({ user }));
+      this.store.dispatch(UserActions.loginUser({ user }));
 
       this.authService.login(this.user);
 

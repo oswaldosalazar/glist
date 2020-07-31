@@ -1,7 +1,9 @@
+import { catchError, tap, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { User } from './models/user';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -43,7 +45,7 @@ export class AuthService {
 
   }
 
-  login(user: User): void {
+  login(user: User): Observable<User> {
     const body = {
       email: user.email,
       passwd: user.password
@@ -51,15 +53,18 @@ export class AuthService {
     // Code here would log into a back end service
     // and return user information
     // This is just hard-coded here.
-    console.log(user)
-    this.http.post<any>(`${this.url}/auth/login`, body, { headers: this.headers }).subscribe(data => {
-      console.log(data)
-    })
-
-
+    console.log(user);
+    return this.http.post<User>(`${this.url}/auth/login`, body, { headers: this.headers })
+      .pipe(
+        tap(data => console.log(data)),
+        catchError(error => error)
+      );
   }
 
-  logout(): void {
-    this.currentUser = null;
-  }
 }
+
+
+// logout(): void {
+//   this.currentUser = null;
+// }
+
