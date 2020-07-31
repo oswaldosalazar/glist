@@ -4,10 +4,14 @@ import {
   createReducer,
   on,
   createFeatureSelector,
-  createSelector
+  createSelector,
 } from '@ngrx/store';
 import * as UserActions from './auth.actions';
-import * as AppState from '../../state/app.state'
+import * as AppState from '../../state/app.state';
+
+export interface State extends AppState.State {
+  user: AuthState;
+}
 
 export interface AuthState {
   isAuthenticated: boolean;
@@ -18,34 +22,43 @@ export interface AuthState {
 const initialState: AuthState = {
   isAuthenticated: false,
   user: null,
-  errorMessage: null
+  errorMessage: null,
 };
 
 const getUserFeatureState = createFeatureSelector<AuthState>('users');
 
 export const getError = createSelector(
   getUserFeatureState,
-  state => state.errorMessage
+  (state) => state.errorMessage
 );
 
 export const getCurrentUser = createSelector(
   getUserFeatureState,
-  state => state.user
+  (state) => state.user
 );
 
-export const userReducer = createReducer<AuthState>(
+export const authReducer = createReducer<AuthState>(
   initialState,
-  on(UserActions.loginUserSuccess, (state, action): AuthState => {
-    return {
-      ...state,
-      user: action.user,
-      errorMessage: ''
-    };
-  }),
-  on(UserActions.loginUserFailure, (state, action) => {
-    return {
-      ...state,
-      errorMessage: action.error
+  on(
+    UserActions.loginUserSuccess,
+    (state, action): AuthState => {
+      console.log(state, action);
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.user,
+        errorMessage: '',
+      };
     }
-  })
+  ),
+  on(
+    UserActions.loginUserFailure,
+    (state, action): AuthState => {
+      console.log(action.error);
+      return {
+        ...state,
+        errorMessage: action.error,
+      };
+    }
+  )
 );

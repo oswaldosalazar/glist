@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: [ './login.component.css' ]
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   pageTitle = 'Log In';
@@ -30,12 +30,12 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private store: Store<State>
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: [ '', [ Validators.required, Validators.email ] ],
-      password: [ '', [ Validators.required ] ]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
     });
   }
 
@@ -46,18 +46,19 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     if (this.loginForm && this.loginForm.valid) {
       const user = this.loginForm.value;
+      console.log(user);
 
       this.store.dispatch(UserActions.loginUser({ user }));
 
-      this.authService.login(this.user);
+      // this.authService.login(this.user);
 
-      this.router.navigate([ '/' ]);
+      this.router.navigate(['/']);
 
-      if (this.authService.redirectUrl) {
-        this.router.navigateByUrl(this.authService.redirectUrl);
-      } else {
-        this.router.navigate([ '/' ]);
-      }
+      // if (this.authService.redirectUrl) {
+      //   this.router.navigateByUrl(this.authService.redirectUrl);
+      // } else {
+      //   this.router.navigate([ '/' ]);
+      // }
     }
   }
 }
