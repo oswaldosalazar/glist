@@ -50,7 +50,6 @@ export class AuthService {
     // Code here would log into a back end service
     // and return user information
     // This is just hard-coded here.
-    console.log(user);
     return this.http.post<User>(`${this.url}/auth/login`, body, {
       headers: this.headers,
     });

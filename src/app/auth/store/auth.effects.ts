@@ -18,15 +18,14 @@ export class AuthEffects {
   loginUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.loginUser),
-      switchMap((action) => {
-        console.log(action);
-        return this.authService.login(action.user).pipe(
+      switchMap((action) =>
+        this.authService.login(action.user).pipe(
           map((user) => UserActions.loginUserSuccess({ user })),
           catchError((error) =>
             of(UserActions.loginUserFailure({ error: error.error.status }))
           )
-        );
-      })
+        )
+      )
     );
   });
 }

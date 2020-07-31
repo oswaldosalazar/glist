@@ -42,7 +42,6 @@ export const authReducer = createReducer<AuthState>(
   on(
     UserActions.loginUserSuccess,
     (state, action): AuthState => {
-      console.log(state, action);
       return {
         ...state,
         isAuthenticated: true,
@@ -54,7 +53,6 @@ export const authReducer = createReducer<AuthState>(
   on(
     UserActions.loginUserFailure,
     (state, action): AuthState => {
-      console.log(action.error);
       return {
         ...state,
         errorMessage: action.error,
