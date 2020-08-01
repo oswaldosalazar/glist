@@ -12,18 +12,14 @@ import { AuthEffects } from './store/auth.effects';
 import { authReducer } from '../auth/store/auth.reducer';
 
 @NgModule({
-  declarations: [ SignupComponent, LoginComponent, LandingComponent ],
+  declarations: [SignupComponent, LoginComponent, LandingComponent],
   imports: [
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    EffectsModule.forRoot([ AuthEffects ]),
-    StoreModule.forFeature('user', authReducer)
+    EffectsModule.forRoot([AuthEffects]),
+    StoreModule.forFeature('currentUser', authReducer),
   ],
-  exports: [
-    SignupComponent,
-    LoginComponent,
-    LandingComponent
-  ]
+  exports: [SignupComponent, LoginComponent, LandingComponent],
 })
-export class AuthModule { }
+export class AuthModule {}

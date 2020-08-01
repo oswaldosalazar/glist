@@ -1,3 +1,4 @@
+import { getCurrentUser } from './../store/auth.reducer';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,6 +12,7 @@ import { Store } from '@ngrx/store';
 import { State } from './../../state/app.state';
 import * as UserActions from '../store/auth.actions';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,7 @@ import { Observable } from 'rxjs';
 export class LoginComponent implements OnInit {
   pageTitle = 'Log In';
   loginForm: FormGroup;
-  user: User = new User();
+  currentUser$: Observable<User>;
 
   maskUserName$: Observable<boolean>;
 
@@ -37,6 +39,14 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
+
+    console.log(this.currentUser$);
+
+    this.currentUser$ = this.store
+      .select(getCurrentUser)
+      .pipe(
+        tap((currentUser) => console.log('from tap: ', currentUser, this.store))
+      );
   }
 
   // checkChanged(): void {
@@ -52,7 +62,7 @@ export class LoginComponent implements OnInit {
 
       // this.authService.login(this.user);
 
-      this.router.navigate(['/']);
+      // this.router.navigate(['/']);
 
       // if (this.authService.redirectUrl) {
       //   this.router.navigateByUrl(this.authService.redirectUrl);

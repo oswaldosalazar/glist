@@ -12,12 +12,12 @@ import { NullTemplateVisitor } from '@angular/compiler';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
   pageTitle = 'Sign Up';
   signupForm: FormGroup;
-  user: User = new User();
+  user: Observable<User>;
 
   passwordPattern =
     '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
@@ -42,9 +42,9 @@ export class SignupComponent implements OnInit {
           Validators.required,
           Validators.pattern(
             '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'
-          )
-        ]
-      ]
+          ),
+        ],
+      ],
     });
   }
 
@@ -56,9 +56,9 @@ export class SignupComponent implements OnInit {
     const { firstName, lastName, email, password } = this.signupForm.value;
 
     if (this.signupForm && this.signupForm.valid) {
-      this.user = { firstName, lastName, email, password };
+      // this.user$ = { firstName, lastName, email, password };
 
-      this.authService.signup(this.user);
+      // this.authService.signup(this.user$);
       this.router.navigate(['/']);
 
       // if (this.authService.redirectUrl) {
