@@ -37,6 +37,11 @@ export const getCurrentUser = createSelector(
   (state) => state.currentUser
 );
 
+export const getCurrentUserStatus = createSelector(
+  getUserFeatureState,
+  (state) => state.isAuthenticated
+);
+
 export const authReducer = createReducer<UserState>(
   initialState,
   on(
@@ -55,6 +60,8 @@ export const authReducer = createReducer<UserState>(
     (state, action): UserState => {
       return {
         ...state,
+        isAuthenticated: false,
+        currentUser: null,
         errorMessage: action.error,
       };
     }
