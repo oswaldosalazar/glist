@@ -42,11 +42,11 @@ export class LoginComponent implements OnInit {
 
     console.log(this.currentUser$);
 
-    this.currentUser$ = this.store.select(getCurrentUser).pipe(
-      tap((currentUser) => {
-        if (currentUser) localStorage.setItem('token', currentUser.token);
-      })
-    );
+    this.currentUser$ = this.store
+      .select(getCurrentUser)
+      .pipe(
+        tap((currentUser) => localStorage.setItem('token', currentUser.token))
+      );
   }
 
   // checkChanged(): void {

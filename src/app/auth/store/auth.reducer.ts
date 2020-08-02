@@ -21,7 +21,7 @@ export interface UserState {
 
 const initialState: UserState = {
   isAuthenticated: false,
-  currentUser: null,
+  currentUser: { token: '' },
   errorMessage: null,
 };
 
