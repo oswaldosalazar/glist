@@ -15,13 +15,13 @@ import * as UserActions from './auth.actions';
 
 export interface UserState {
   isAuthenticated: boolean;
-  currentUser: User | null;
+  user: User | null;
   errorMessage: string | null;
 }
 
 const initialState: UserState = {
   isAuthenticated: false,
-  currentUser: { token: '' },
+  user: { token: '' },
   errorMessage: null,
 };
 
@@ -34,7 +34,7 @@ export const getError = createSelector(
 
 export const getCurrentUser = createSelector(
   getUserFeatureState,
-  (state) => state.currentUser
+  (state) => state.user
 );
 
 export const getCurrentUserStatus = createSelector(
@@ -50,7 +50,7 @@ export const authReducer = createReducer<UserState>(
       return {
         ...state,
         isAuthenticated: true,
-        currentUser: action.user,
+        user: action.user,
         errorMessage: '',
       };
     }
@@ -61,7 +61,7 @@ export const authReducer = createReducer<UserState>(
       return {
         ...state,
         isAuthenticated: false,
-        currentUser: null,
+        user: { token: '' },
         errorMessage: action.error,
       };
     }
