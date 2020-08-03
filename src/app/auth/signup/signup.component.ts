@@ -63,10 +63,11 @@ export class SignupComponent implements OnInit {
   onSubmit(): void {
     const user = this.signupForm.value;
     if (this.signupForm && this.signupForm.valid) {
-      // this.user$ = { firstName, lastName, email, password };
+      console.log(user);
 
-      // this.authService.signup(this.user$);
-      this.router.navigate(['/']);
+      this.store.dispatch(UserActions.signupUser({ user }));
+
+      // this.router.navigate(['/']);
 
       // if (this.authService.redirectUrl) {
       //   this.router.navigateByUrl(this.authService.redirectUrl);
@@ -74,8 +75,5 @@ export class SignupComponent implements OnInit {
       //   this.router.navigate(['/']);
       // }
     }
-
-    console.log(this.signupForm);
-    console.log(this.currentUser$);
   }
 }

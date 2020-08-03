@@ -31,7 +31,11 @@ export class AuthEffects {
         this.authService.signup(action.user).pipe(
           map(user => UserActions.signupUserSuccess({ user })),
           catchError(error =>
-            of(UserActions.signupUserFailure({ error: error.error.status }))
+            of(
+              UserActions.signupUserFailure({
+                error: error.error.status.detail
+              })
+            )
           )
         )
       )
