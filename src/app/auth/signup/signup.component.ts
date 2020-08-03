@@ -1,34 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import { AuthService } from '../auth.service';
 
 import { User } from './../models/user';
+import { getCurrentUser } from './../store/auth.reducer';
+
+/* NgRx */
+import { Store } from '@ngrx/store';
+import { State } from './../../state/app.state';
 import * as UserActions from '../store/auth.actions';
-import { NullTemplateVisitor } from '@angular/compiler';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css'],
+  styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
   pageTitle = 'Sign Up';
   signupForm: FormGroup;
-  user: Observable<User>;
+  currentUser$: Observable<User>;
 
   passwordPattern =
     '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
-
-  maskUserName$: Observable<boolean>;
 
   constructor(
     // private store: Store<State>,
     private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private store: Store<State>
   ) {}
 
   ngOnInit(): void {
@@ -42,19 +46,22 @@ export class SignupComponent implements OnInit {
           Validators.required,
           Validators.pattern(
             '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'
-          ),
-        ],
-      ],
+          )
+        ]
+      ]
     });
+
+    console.log(this.currentUser$);
+
+    this.currentUser$ = this.store
+      .select(getCurrentUser)
+      .pipe(
+        tap(currentUser => localStorage.setItem('token', currentUser.token))
+      );
   }
 
-  // checkChanged(): void {
-  //   this.store.dispatch(UserActions.maskUserName());
-  // }
-
   onSubmit(): void {
-    const { firstName, lastName, email, password } = this.signupForm.value;
-
+    const user = this.signupForm.value;
     if (this.signupForm && this.signupForm.valid) {
       // this.user$ = { firstName, lastName, email, password };
 
@@ -69,6 +76,6 @@ export class SignupComponent implements OnInit {
     }
 
     console.log(this.signupForm);
-    console.log(this.user);
+    console.log(this.currentUser$);
   }
 }
