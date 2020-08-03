@@ -6,7 +6,7 @@ import { User } from './models/user';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
   currentUser: User | null;
@@ -17,7 +17,7 @@ export class AuthService {
     'Content-Type': 'application/json',
     Accept: 'application/json',
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-    Authorization: 'Bearer ' + localStorage.getItem('token'),
+    Authorization: 'Bearer ' + localStorage.getItem('token')
   };
 
   constructor(private http: HttpClient) {}
@@ -26,32 +26,28 @@ export class AuthService {
     return !!this.currentUser;
   }
 
-  signup(user: User): void {
+  signup(user: User): Observable<User> {
     const body = {
       first_name: user.firstName,
       last_name: user.lastName,
       email: user.email,
-      passwd: user.password,
+      passwd: user.password
     };
 
     console.log(user);
-    this.http
-      .post<any>(`${this.url}/auth/signup`, body, { headers: this.headers })
-      .subscribe((data) => {
-        console.log(data);
-      });
+    return this.http.post<User>(`${this.url}/auth/signup`, body, {
+      headers: this.headers
+    });
   }
 
   login(user: User): Observable<User> {
     const body = {
       email: user.email,
-      passwd: user.password,
+      passwd: user.password
     };
-    // Code here would log into a back end service
-    // and return user information
-    // This is just hard-coded here.
+
     return this.http.post<User>(`${this.url}/auth/login`, body, {
-      headers: this.headers,
+      headers: this.headers
     });
   }
 }
