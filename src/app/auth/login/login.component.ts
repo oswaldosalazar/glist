@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     this.currentUser$ = this.store.select(getCurrentUser).pipe(
       tap(currentUser => {
         localStorage.setItem('token', currentUser.token);
-        if (!!currentUser.token) this.router.navigate(['/lists']);
+        if (!!currentUser.token) this.router.navigate(['/landing']);
       })
       // catchError(currentUser => (this.errorMessage = currentUser.error))
     );
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
       // if (this.authService.redirectUrl) {
       //   this.router.navigateByUrl(this.authService.redirectUrl);
       // } else {
-      //   this.router.navigate(['/lists']);
+      //   this.router.navigate(['/landing']);
       // }
     }
   }

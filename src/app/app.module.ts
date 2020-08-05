@@ -10,13 +10,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { EffectsModule } from '@ngrx/effects';
 
 import { AuthModule } from './auth/auth.module';
-import { ListsComponent } from './lists/lists/lists.component';
 
 @NgModule({
-  declarations: [AppComponent, ListsComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
