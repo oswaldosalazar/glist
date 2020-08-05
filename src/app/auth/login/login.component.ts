@@ -12,7 +12,7 @@ import { Store } from '@ngrx/store';
 import { State } from './../../state/app.state';
 import * as UserActions from '../store/auth.actions';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -23,10 +23,9 @@ export class LoginComponent implements OnInit {
   pageTitle = 'Log In';
   loginForm: FormGroup;
   currentUser$: Observable<User>;
+  errorMessage: string | null;
 
   constructor(
-    // private store: Store<State>,
-    private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
     private store: Store<State>
@@ -40,11 +39,10 @@ export class LoginComponent implements OnInit {
 
     console.log(this.currentUser$);
 
-    this.currentUser$ = this.store
-      .select(getCurrentUser)
-      .pipe(
-        tap(currentUser => localStorage.setItem('token', currentUser.token))
-      );
+    this.currentUser$ = this.store.select(getCurrentUser).pipe(
+      tap(currentUser => localStorage.setItem('token', currentUser.token))
+      // catchError(currentUser => (this.errorMessage = currentUser.error))
+    );
   }
 
   onSubmit(): void {

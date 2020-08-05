@@ -7,11 +7,6 @@ import {
   createSelector
 } from '@ngrx/store';
 import * as UserActions from './auth.actions';
-// import * as AppState from '../../state/app.state';
-
-// export interface State extends AppState.State {
-//   userState: AuthState;
-// }
 
 export interface UserState {
   isAuthenticated: boolean;
@@ -86,6 +81,12 @@ export const authReducer = createReducer<UserState>(
         user: { token: '' },
         errorMessage: action.error
       };
+    }
+  ),
+  on(
+    UserActions.logoutUser,
+    (state): UserState => {
+      return initialState;
     }
   )
 );

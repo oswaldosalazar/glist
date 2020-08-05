@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { switchMap, map, catchError } from 'rxjs/operators';
+import { switchMap, map, catchError, tap } from 'rxjs/operators';
 
 import { AuthService } from '../../auth/auth.service';
 import * as UserActions from './auth.actions';
@@ -39,6 +39,13 @@ export class AuthEffects {
           )
         )
       )
+    );
+  });
+
+  logoutUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.logoutUser),
+      tap(user => localStorage.removeItem('token'))
     );
   });
 }

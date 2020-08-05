@@ -13,9 +13,10 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 
 import { AuthModule } from './auth/auth.module';
+import { LandingComponent } from './landing/landing/landing.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LandingComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
