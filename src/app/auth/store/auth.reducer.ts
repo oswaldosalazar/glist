@@ -9,13 +9,13 @@ import {
 import * as UserActions from './auth.actions';
 
 export interface UserState {
-  isAuthenticated: boolean;
+  isLoggedIn: boolean;
   user: User | null;
   errorMessage: string | null;
 }
 
 const initialState: UserState = {
-  isAuthenticated: false,
+  isLoggedIn: false,
   user: { token: '' },
   errorMessage: null
 };
@@ -34,7 +34,7 @@ export const getCurrentUser = createSelector(
 
 export const getCurrentUserStatus = createSelector(
   getUserFeatureState,
-  state => state.isAuthenticated
+  state => state.isLoggedIn
 );
 
 export const authReducer = createReducer<UserState>(
@@ -44,7 +44,7 @@ export const authReducer = createReducer<UserState>(
     (state, action): UserState => {
       return {
         ...state,
-        isAuthenticated: true,
+        isLoggedIn: true,
         user: action.user,
         errorMessage: ''
       };
@@ -55,7 +55,7 @@ export const authReducer = createReducer<UserState>(
     (state, action): UserState => {
       return {
         ...state,
-        isAuthenticated: false,
+        isLoggedIn: false,
         user: { token: '' },
         errorMessage: action.error
       };
@@ -66,7 +66,7 @@ export const authReducer = createReducer<UserState>(
     (state, action): UserState => {
       return {
         ...state,
-        isAuthenticated: true,
+        isLoggedIn: true,
         user: action.user,
         errorMessage: ''
       };
@@ -77,7 +77,7 @@ export const authReducer = createReducer<UserState>(
     (state, action): UserState => {
       return {
         ...state,
-        isAuthenticated: false,
+        isLoggedIn: false,
         user: { token: '' },
         errorMessage: action.error
       };
@@ -86,7 +86,10 @@ export const authReducer = createReducer<UserState>(
   on(
     UserActions.logoutUser,
     (state): UserState => {
-      return initialState;
+      return {
+        ...state,
+        ...initialState
+      };
     }
   )
 );

@@ -23,7 +23,12 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   isLoggedIn(): boolean {
-    return !!this.currentUser;
+    // return !!this.currentUser;
+    return;
+  }
+
+  getToken(): string {
+    return localStorage.getItem('token');
   }
 
   signup(user: User): Observable<User> {

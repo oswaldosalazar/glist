@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../auth.service';
-
 import { User } from './../models/user';
 import { getCurrentUser } from './../store/auth.reducer';
 
@@ -37,15 +35,18 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]]
     });
 
-    console.log(this.currentUser$);
-
     this.currentUser$ = this.store.select(getCurrentUser).pipe(
       tap(currentUser => {
         localStorage.setItem('token', currentUser.token);
         if (!!currentUser.token) this.router.navigate(['/landing']);
+      }),
+      catchError(currentUser => {
+        console.log(currentUser.errorMessage);
+        return (this.errorMessage = currentUser.errorMessage);
       })
-      // catchError(currentUser => (this.errorMessage = currentUser.error))
     );
+
+    console.log(this.currentUser$);
   }
 
   onSubmit(): void {
