@@ -53,11 +53,12 @@ export class SignupComponent implements OnInit {
 
     console.log(this.currentUser$);
 
-    this.currentUser$ = this.store
-      .select(getCurrentUser)
-      .pipe(
-        tap(currentUser => localStorage.setItem('token', currentUser.token))
-      );
+    this.currentUser$ = this.store.select(getCurrentUser).pipe(
+      tap(currentUser => {
+        localStorage.setItem('token', currentUser.token);
+        if (!!currentUser.token) this.router.navigate(['/landing']);
+      })
+    );
   }
 
   onSubmit(): void {
