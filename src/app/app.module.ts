@@ -13,27 +13,27 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 
 import { AuthModule } from './auth/auth.module';
-import { LandingComponent } from './landing/landing/landing.component';
+import { ListsComponent } from './lists/lists/lists.component';
 
 @NgModule({
-  declarations: [AppComponent, LandingComponent],
+  declarations: [AppComponent, ListsComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
+      enabled: environment.production
     }),
     AuthModule,
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       name: 'Glist',
       maxAge: 25,
-      logOnly: environment.production,
-    }),
+      logOnly: environment.production
+    })
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
