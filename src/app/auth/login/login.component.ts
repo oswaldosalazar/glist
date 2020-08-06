@@ -3,14 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { User } from './../models/user';
-import { getCurrentUser } from './../store/auth.reducer';
+import { getCurrentUser, getError } from './../store/auth.reducer';
 
 /* NgRx */
 import { Store } from '@ngrx/store';
 import { State } from './../../state/app.state';
 import * as UserActions from '../store/auth.actions';
 import { Observable } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
   pageTitle = 'Log In';
   loginForm: FormGroup;
   currentUser$: Observable<User>;
-  errorMessage: string | null;
+  errorMessage$: Observable<string>;
+  getState: Observable<State>;
 
   constructor(
     private router: Router,
@@ -36,24 +37,25 @@ export class LoginComponent implements OnInit {
     });
 
     this.currentUser$ = this.store.select(getCurrentUser).pipe(
-      tap(currentUser => {
-        localStorage.setItem('token', currentUser.token);
-        if (!!currentUser.token) this.router.navigate(['/landing']);
-      }),
-      catchError(currentUser => {
-        console.log(currentUser.errorMessage);
-        return (this.errorMessage = currentUser.errorMessage);
+      tap(user => {
+        console.log('CurrentUser from login: ', user);
+        localStorage.setItem('token', user.token);
+        if (!!user.token) this.router.navigate(['/landing']);
       })
+      // ,
+      // catchError(currentUser => {
+      //   console.log(currentUser.errorMessage);
+      //   return (this.errorMessage = currentUser.errorMessage);
+      // })
     );
 
-    console.log(this.currentUser$);
+    this.errorMessage$ = this.store.select(getError);
+    console.log(this.errorMessage$);
   }
 
   onSubmit(): void {
     const user = this.loginForm.value;
     if (this.loginForm && this.loginForm.valid) {
-      console.log(user);
-
       this.store.dispatch(UserActions.loginUser({ user }));
 
       // if (this.authService.redirectUrl) {

@@ -39,7 +39,6 @@ export class AuthService {
       passwd: user.password
     };
 
-    console.log(user);
     return this.http.post<User>(`${this.url}/auth/signup`, body, {
       headers: this.headers
     });

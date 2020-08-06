@@ -51,8 +51,6 @@ export class SignupComponent implements OnInit {
       ]
     });
 
-    console.log(this.currentUser$);
-
     this.currentUser$ = this.store.select(getCurrentUser).pipe(
       tap(currentUser => {
         localStorage.setItem('token', currentUser.token);
@@ -64,8 +62,6 @@ export class SignupComponent implements OnInit {
   onSubmit(): void {
     const user = this.signupForm.value;
     if (this.signupForm && this.signupForm.valid) {
-      console.log(user);
-
       this.store.dispatch(UserActions.signupUser({ user }));
 
       // this.router.navigate(['/']);
