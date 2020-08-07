@@ -29,8 +29,7 @@ export class AuthEffects {
       exhaustMap(action =>
         this.authService.login(action.user).pipe(
           map(user => {
-            localStorage.setItem('token', user.token);
-            this.router.navigate(['/landing']);
+            this.authService.afterAuthentication(user.token);
             return UserActions.loginUserSuccess({ user });
           }),
           catchError(error =>
@@ -46,7 +45,10 @@ export class AuthEffects {
       ofType(UserActions.signupUser),
       exhaustMap(action =>
         this.authService.signup(action.user).pipe(
-          map(user => UserActions.signupUserSuccess({ user })),
+          map(user => {
+            this.authService.afterAuthentication(user.token);
+            return UserActions.signupUserSuccess({ user });
+          }),
           catchError(error =>
             of(
               UserActions.signupUserFailure({

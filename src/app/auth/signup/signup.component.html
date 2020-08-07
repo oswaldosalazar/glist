@@ -109,6 +109,7 @@
       </form>
       <div>
         {{ currentUser$ | async | json }}
+        {{ errorMessage$ | async }}
       </div>
     </div>
   </div>

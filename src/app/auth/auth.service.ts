@@ -56,4 +56,9 @@ export class AuthService {
       headers: this.headers
     });
   }
+
+  afterAuthentication(token) {
+    localStorage.setItem('token', token);
+    this.router.navigate(['/landing']);
+  }
 }

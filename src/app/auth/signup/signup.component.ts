@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 import { User } from './../models/user';
-import { getCurrentUser } from './../store/auth.reducer';
+import { getCurrentUser, getError } from './../store/auth.reducer';
 
 /* NgRx */
 import { Store } from '@ngrx/store';
@@ -26,9 +26,9 @@ export class SignupComponent implements OnInit {
 
   passwordPattern =
     '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
+  errorMessage$: Observable<string>;
 
   constructor(
-    // private store: Store<State>,
     private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
@@ -52,11 +52,12 @@ export class SignupComponent implements OnInit {
     });
 
     this.currentUser$ = this.store.select(getCurrentUser).pipe(
-      tap(currentUser => {
-        localStorage.setItem('token', currentUser.token);
-        if (!!currentUser.token) this.router.navigate(['/landing']);
+      tap(user => {
+        console.log('CurrentUser from signup: ', user);
       })
     );
+
+    this.errorMessage$ = this.store.select(getError);
   }
 
   onSubmit(): void {

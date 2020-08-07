@@ -27,12 +27,10 @@ export class LandingComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser$ = this.store.select(getCurrentUser);
-    console.log(this.currentUser$);
     this.error$ = this.store.select(getError);
   }
 
   logout(): void {
-    console.log('this is logout');
     this.store.dispatch(UserActions.logoutUser());
   }
 }
