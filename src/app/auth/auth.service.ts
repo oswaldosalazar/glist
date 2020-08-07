@@ -56,9 +56,4 @@ export class AuthService {
       headers: this.headers
     });
   }
-
-  logout() {
-    localStorage.removeItem('token');
-    // this.router.navigate(['/landing']);
-  }
 }

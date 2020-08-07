@@ -86,6 +86,7 @@ export const authReducer = createReducer<UserState>(
   on(
     UserActions.logoutUser,
     (state): UserState => {
+      localStorage.removeItem('token');
       return {
         ...state,
         ...initialState

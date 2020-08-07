@@ -39,14 +39,7 @@ export class LoginComponent implements OnInit {
     this.currentUser$ = this.store.select(getCurrentUser).pipe(
       tap(user => {
         console.log('CurrentUser from login: ', user);
-        // localStorage.setItem('token', user.token);
-        // if (!!user.token) this.router.navigate(['/landing']);
       })
-      // ,
-      // catchError(currentUser => {
-      //   console.log(currentUser.errorMessage);
-      //   return (this.errorMessage = currentUser.errorMessage);
-      // })
     );
 
     this.errorMessage$ = this.store.select(getError);
@@ -56,12 +49,6 @@ export class LoginComponent implements OnInit {
     const user = this.loginForm.value;
     if (this.loginForm && this.loginForm.valid) {
       this.store.dispatch(UserActions.loginUser({ user }));
-
-      // if (this.authService.redirectUrl) {
-      //   this.router.navigateByUrl(this.authService.redirectUrl);
-      // } else {
-      //   this.router.navigate(['/landing']);
-      // }
     }
   }
 }

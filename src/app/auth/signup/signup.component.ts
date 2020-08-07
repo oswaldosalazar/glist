@@ -63,14 +63,6 @@ export class SignupComponent implements OnInit {
     const user = this.signupForm.value;
     if (this.signupForm && this.signupForm.valid) {
       this.store.dispatch(UserActions.signupUser({ user }));
-
-      // this.router.navigate(['/']);
-
-      // if (this.authService.redirectUrl) {
-      //   this.router.navigateByUrl(this.authService.redirectUrl);
-      // } else {
-      //   this.router.navigate(['/']);
-      // }
     }
   }
 }

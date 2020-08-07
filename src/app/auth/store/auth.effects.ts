@@ -58,12 +58,4 @@ export class AuthEffects {
       )
     );
   });
-
-  logoutUser$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserActions.logoutUserSuccess),
-      tap(() => this.authService.logout())
-    );
-  });
 }
-// , { dispatch: false }
