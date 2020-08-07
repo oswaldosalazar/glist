@@ -1,5 +1,13 @@
 <h1>GList</h1>
 
-<a [routerLink]="['/signup']">Sign Up</a>
+<ng-container
+  *ngIf="currentUserStatus$; then thenTemplate; else elseTemplate"
+></ng-container>
+<ng-template #thenTemplate>
+  <button (click)="logout()">Log out</button>
+</ng-template>
+<ng-template #elseTemplate>
+  <a [routerLink]="['/signup']">Sign Up</a>
 
-<a [routerLink]="['/login']">Login</a>
+  <a [routerLink]="['/login']">Login</a>
+</ng-template>
