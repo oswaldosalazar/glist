@@ -1,3 +1,4 @@
+import { getCurrentUserStatus } from './store/auth.reducer';
 import { Injectable } from '@angular/core';
 import {
   CanActivate,
@@ -7,6 +8,7 @@ import {
   Router
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { AuthService } from './auth.service';
 
@@ -14,20 +16,24 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private store: Store
+  ) {}
+  canActivate(): boolean {
     if (!this.auth.getToken()) {
-      this.router.navigate(['login']);
+      this.router.navigate(['/login']);
       return false;
     } else {
       return true;
     }
+
+    // if (!this.auth.getToken()) {
+    //   this.router.navigate(['/login']);
+    // }
+    // console.log(this.store.select(getCurrentUserStatus));
+
+    // return this.store.select(getCurrentUserStatus);
   }
 }

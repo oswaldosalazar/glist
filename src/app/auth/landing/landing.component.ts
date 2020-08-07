@@ -17,19 +17,22 @@ import {
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-  error: Observable<string>;
+  error$: Observable<string>;
   currentUserStatus$: Observable<boolean>;
   currentUser$: Observable<User>;
 
-  constructor(private store: Store<State>) {}
+  constructor(private store: Store<State>) {
+    this.currentUserStatus$ = this.store.select(getCurrentUserStatus);
+  }
 
   ngOnInit(): void {
-    this.currentUserStatus$ = this.store.select(getCurrentUserStatus);
     this.currentUser$ = this.store.select(getCurrentUser);
-    this.error = this.store.select(getError);
+    console.log(this.currentUser$);
+    this.error$ = this.store.select(getError);
   }
 
   logout(): void {
+    console.log('this is logout');
     this.store.dispatch(UserActions.logoutUser());
   }
 }

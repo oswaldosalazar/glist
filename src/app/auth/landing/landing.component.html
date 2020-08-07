@@ -1,9 +1,10 @@
 <h1>GList</h1>
 
 <ng-container
-  *ngIf="currentUserStatus$; then thenTemplate; else elseTemplate"
+  *ngIf="currentUserStatus$ | async; then thenTemplate; else elseTemplate"
 ></ng-container>
 <ng-template #thenTemplate>
+  {{ currentUser$ | async | json }} is logged in
   <button (click)="logout()">Log out</button>
 </ng-template>
 <ng-template #elseTemplate>

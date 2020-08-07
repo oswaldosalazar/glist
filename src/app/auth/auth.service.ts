@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { User } from './models/user';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,9 @@ export class AuthService {
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
     Authorization: 'Bearer ' + localStorage.getItem('token')
   };
+  sub: Subscription;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   isLoggedIn(): boolean {
     // return !!this.currentUser;
@@ -54,8 +56,9 @@ export class AuthService {
       headers: this.headers
     });
   }
-}
 
-// logout(): void {
-//   this.currentUser = null;
-// }
+  logout() {
+    localStorage.removeItem('token');
+    // this.router.navigate(['/landing']);
+  }
+}

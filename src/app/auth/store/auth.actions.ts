@@ -30,3 +30,5 @@ export const signupUserFailure = createAction(
 );
 
 export const logoutUser = createAction('[User] Logout');
+
+export const logoutUserSuccess = createAction('[User] Logout Success');
