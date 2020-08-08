@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { MaterialModule } from './material/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -20,6 +22,8 @@ import { AuthModule } from './auth/auth.module';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MaterialModule,
+    FlexLayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
     }),

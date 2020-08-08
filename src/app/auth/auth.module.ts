@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
 import { AuthEffects } from './store/auth.effects';
 import { authReducer } from '../auth/store/auth.reducer';
+import { SharedModule } from '../shared.module';
 
 @NgModule({
   declarations: [SignupComponent, LoginComponent, LandingComponent],
@@ -17,9 +18,10 @@ import { authReducer } from '../auth/store/auth.reducer';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
+    SharedModule,
     EffectsModule.forRoot([AuthEffects]),
-    StoreModule.forFeature('currentUser', authReducer),
+    StoreModule.forFeature('currentUser', authReducer)
   ],
-  exports: [SignupComponent, LoginComponent, LandingComponent],
+  exports: [SignupComponent, LoginComponent, LandingComponent]
 })
 export class AuthModule {}
