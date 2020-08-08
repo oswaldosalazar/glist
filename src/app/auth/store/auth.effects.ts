@@ -2,15 +2,7 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import {
-  switchMap,
-  map,
-  catchError,
-  tap,
-  flatMap,
-  exhaustMap,
-  mergeMap
-} from 'rxjs/operators';
+import { map, catchError, exhaustMap } from 'rxjs/operators';
 
 import { AuthService } from '../../auth/auth.service';
 import * as UserActions from './auth.actions';
