@@ -1,8 +1,4 @@
 <section class="login-form">
-  <h3>
-    {{ pageTitle }}
-  </h3>
-
   <form
     fxLayout="column"
     fxLayoutAlign="center center"
@@ -11,8 +7,10 @@
     [formGroup]="loginForm"
     autocomplete="off"
   >
+    <h3>
+      {{ pageTitle }}
+    </h3>
     <mat-form-field>
-      <!-- <label for="emailId">Email</label> -->
       <input
         matInput
         type="email"
@@ -22,7 +20,6 @@
     </mat-form-field>
 
     <mat-form-field>
-      <!-- <label class="col-md-2 col-form-label" for="passwordId">Password</label> -->
       <input
         matInput
         type="password"
@@ -39,10 +36,8 @@
     >
       Submit
     </button>
+    <div [hidden]="true">
+      {{ errorMessage$ | async }}
+    </div>
   </form>
-
-  <div>
-    {{ currentUser$ | async | json }}
-    {{ errorMessage$ | async }}
-  </div>
 </section>

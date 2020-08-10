@@ -92,5 +92,14 @@ export const authReducer = createReducer<UserState>(
         ...initialState
       };
     }
+  ),
+  on(
+    UserActions.initAuth,
+    (state): UserState => {
+      return {
+        ...state,
+        ...initialState
+      };
+    }
   )
 );

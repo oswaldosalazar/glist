@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 
 import { User } from './../models/user';
 import { getCurrentUser, getError } from './../store/auth.reducer';
+import { UIService } from './../../ui/ui.service';
 
 /* NgRx */
 import { Store } from '@ngrx/store';
 import { State } from './../../state/app.state';
 import * as UserActions from '../store/auth.actions';
 import { Observable } from 'rxjs';
-import { tap, catchError, map } from 'rxjs/operators';
+import { tap, take, map, exhaustMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ import { tap, catchError, map } from 'rxjs/operators';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  pageTitle = 'Log In';
+  pageTitle = 'Login';
   loginForm: FormGroup;
   currentUser$: Observable<User>;
   errorMessage$: Observable<string>;
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    private uiService: UIService,
     private store: Store<State>
   ) {}
 
@@ -42,13 +44,19 @@ export class LoginComponent implements OnInit {
       })
     );
 
-    this.errorMessage$ = this.store.select(getError);
+    this.errorMessage$ = this.store.select(getError).pipe(
+      map(error => {
+        if (!!error) {
+          this.uiService.showSnackBar(error, null, 3000);
+          this.store.dispatch(UserActions.initAuth());
+        }
+        return error;
+      })
+    );
   }
 
   onSubmit(): void {
     const user = this.loginForm.value;
-    if (this.loginForm && this.loginForm.valid) {
-      this.store.dispatch(UserActions.loginUser({ user }));
-    }
+    this.store.dispatch(UserActions.loginUser({ user }));
   }
 }

@@ -14,6 +14,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
 import { AuthModule } from './auth/auth.module';
+import { UIService } from './ui/ui.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,7 +36,7 @@ import { AuthModule } from './auth/auth.module';
       logOnly: environment.production
     })
   ],
-  providers: [],
+  providers: [UIService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
