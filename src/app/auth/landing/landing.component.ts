@@ -31,6 +31,7 @@ export class LandingComponent implements OnInit {
   }
 
   logout(): void {
+    localStorage.removeItem('token');
     this.store.dispatch(UserActions.logoutUser());
   }
 }

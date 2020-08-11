@@ -41,65 +41,52 @@ export const authReducer = createReducer<UserState>(
   initialState,
   on(
     UserActions.loginUserSuccess,
-    (state, action): UserState => {
-      return {
-        ...state,
-        isLoggedIn: true,
-        user: action.user,
-        errorMessage: ''
-      };
-    }
+    (state, action): UserState => ({
+      ...state,
+      isLoggedIn: true,
+      user: action.user,
+      errorMessage: ''
+    })
   ),
   on(
     UserActions.loginUserFailure,
-    (state, action): UserState => {
-      return {
-        ...state,
-        isLoggedIn: false,
-        user: { token: '' },
-        errorMessage: action.error
-      };
-    }
+    (state, action): UserState => ({
+      ...state,
+      isLoggedIn: false,
+      user: { token: '' },
+      errorMessage: action.error
+    })
   ),
   on(
     UserActions.signupUserSuccess,
-    (state, action): UserState => {
-      return {
-        ...state,
-        isLoggedIn: true,
-        user: action.user,
-        errorMessage: ''
-      };
-    }
+    (state, action): UserState => ({
+      ...state,
+      isLoggedIn: true,
+      user: action.user,
+      errorMessage: ''
+    })
   ),
   on(
     UserActions.signupUserFailure,
-    (state, action): UserState => {
-      return {
-        ...state,
-        isLoggedIn: false,
-        user: { token: '' },
-        errorMessage: action.error
-      };
-    }
+    (state, action): UserState => ({
+      ...state,
+      isLoggedIn: false,
+      user: { token: '' },
+      errorMessage: action.error
+    })
   ),
   on(
     UserActions.logoutUser,
-    (state): UserState => {
-      localStorage.removeItem('token');
-      return {
-        ...state,
-        ...initialState
-      };
-    }
+    (state): UserState => ({
+      ...state,
+      ...initialState
+    })
   ),
   on(
     UserActions.initAuth,
-    (state): UserState => {
-      return {
-        ...state,
-        ...initialState
-      };
-    }
+    (state): UserState => ({
+      ...state,
+      errorMessage: ''
+    })
   )
 );

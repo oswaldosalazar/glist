@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-
-import { AuthService } from '../auth.service';
 
 import { User } from './../models/user';
 import { getCurrentUser, getError } from './../store/auth.reducer';
+import { UIService } from './../../ui/ui.service';
 
 /* NgRx */
 import { Store } from '@ngrx/store';
 import { State } from './../../state/app.state';
 import * as UserActions from '../store/auth.actions';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup',
@@ -29,9 +27,8 @@ export class SignupComponent implements OnInit {
   errorMessage$: Observable<string>;
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
     private fb: FormBuilder,
+    private uiService: UIService,
     private store: Store<State>
   ) {}
 
@@ -51,13 +48,21 @@ export class SignupComponent implements OnInit {
       ]
     });
 
-    this.currentUser$ = this.store.select(getCurrentUser).pipe(
-      tap(user => {
-        console.log('CurrentUser from signup: ', user);
+    // this.currentUser$ = this.store.select(getCurrentUser).pipe(
+    //   tap(user => {
+    //     console.log('CurrentUser from signup: ', user);
+    //   })
+    // );
+
+    this.errorMessage$ = this.store.select(getError).pipe(
+      map(error => {
+        if (!!error) {
+          this.uiService.showSnackBar(error, null, 2500);
+          this.store.dispatch(UserActions.initAuth());
+        }
+        return error;
       })
     );
-
-    this.errorMessage$ = this.store.select(getError);
   }
 
   onSubmit(): void {
