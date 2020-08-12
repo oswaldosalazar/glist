@@ -75,13 +75,13 @@ export const authReducer = createReducer<UserState>(
       errorMessage: action.error
     })
   ),
-  on(
-    UserActions.logoutUser,
-    (state): UserState => ({
-      ...state,
-      ...initialState
-    })
-  ),
+  // on(
+  //   UserActions.logoutUser,
+  //   (state): UserState => ({
+  //     ...state,
+  //     ...initialState
+  //   })
+  // ),
   on(
     UserActions.initAuth,
     (state): UserState => ({

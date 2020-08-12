@@ -6,6 +6,7 @@
 <ng-template #thenTemplate>
   {{ currentUser$ | async | json }} is logged in
   <button (click)="logout()">Log out</button>
+  Status {{ currentUserStatus$ | async }}
 </ng-template>
 <ng-template #elseTemplate>
   <a [routerLink]="['/signup']">Sign Up</a>

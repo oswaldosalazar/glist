@@ -16,13 +16,16 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  currentUserStatus$: Observable<boolean>;
+
   constructor(
     private auth: AuthService,
     private router: Router,
     private store: Store
   ) {}
   canActivate(): boolean {
-    if (!this.auth.getToken()) {
+    this.currentUserStatus$ = this.store.select(getCurrentUserStatus);
+    if (!this.currentUserStatus$) {
       this.router.navigate(['/login']);
       return false;
     } else {
