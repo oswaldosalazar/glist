@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State } from '../../../app/state/app.state';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
 import { User } from './../models/user';
+import { State } from '../../../app/state/app.state';
 
 import * as UserActions from '../store/auth.actions';
 import {
@@ -21,7 +23,7 @@ export class LandingComponent implements OnInit {
   currentUserStatus$: Observable<boolean>;
   currentUser$: Observable<User>;
 
-  constructor(private store: Store<State>) {
+  constructor(private store: Store<State>, private router: Router) {
     this.currentUserStatus$ = this.store.select(getCurrentUserStatus);
   }
 
@@ -33,6 +35,7 @@ export class LandingComponent implements OnInit {
 
   logout(): void {
     localStorage.removeItem('token');
+    this.router.navigate(['/login']);
     this.store.dispatch(UserActions.initAuth());
   }
 }

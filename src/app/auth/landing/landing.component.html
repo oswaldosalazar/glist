@@ -12,4 +12,7 @@
   <a [routerLink]="['/signup']">Sign Up</a>
 
   <a [routerLink]="['/login']">Login</a>
+
+  {{ currentUser$ | async | json }} is not logged in Status
+  {{ currentUserStatus$ | async }}
 </ng-template>
