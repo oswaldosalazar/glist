@@ -1,10 +1,13 @@
-import { catchError, tap, map } from 'rxjs/operators';
+import { getCurrentUser } from './store/auth.reducer';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { User } from './models/user';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { State } from './../state/app.state';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +25,11 @@ export class AuthService {
   };
   sub: Subscription;
 
-  constructor(private http: HttpClient, private router: Router) {}
-
-  isLoggedIn(): boolean {
-    // return !!this.currentUser;
-    return;
-  }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private store: Store<State>
+  ) {}
 
   getToken(): string {
     return localStorage.getItem('token');
@@ -60,5 +62,11 @@ export class AuthService {
   afterAuthentication(token) {
     localStorage.setItem('token', token);
     this.router.navigate(['/landing']);
+    this.store
+      .select(getCurrentUser)
+      .subscribe(user => localStorage.setItem('user', JSON.stringify(user)));
+    // state => console.log(state)
+    // localStorage.setItem('state', JSON.stringify(state))
+    // );
   }
 }
