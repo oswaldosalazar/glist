@@ -81,5 +81,14 @@ export const authReducer = createReducer<UserState>(
       ...state,
       errorMessage: ''
     })
+  ),
+  on(
+    UserActions.getUserFromLocalStorage,
+    (state, action): UserState => ({
+      ...state,
+      isLoggedIn: true,
+      user: JSON.parse(localStorage.getItem('user')),
+      errorMessage: ''
+    })
   )
 );

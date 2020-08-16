@@ -29,8 +29,8 @@ export const signupUserFailure = createAction(
   props<{ error: string }>()
 );
 
-// export const logoutUser = createAction('[User] Logout');
-
-// export const logoutUserSuccess = createAction('[User] Logout Success');
-
 export const initAuth = createAction('[User] Initialize Auth');
+
+export const getUserFromLocalStorage = createAction(
+  '[User] Get User From Local Storage'
+);

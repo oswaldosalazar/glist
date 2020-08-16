@@ -35,6 +35,7 @@ export class LandingComponent implements OnInit {
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.router.navigate(['/login']);
     this.store.dispatch(UserActions.initAuth());
   }
