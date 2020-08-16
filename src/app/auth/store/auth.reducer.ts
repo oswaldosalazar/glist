@@ -79,7 +79,7 @@ export const authReducer = createReducer<UserState>(
     UserActions.initAuth,
     (state): UserState => ({
       ...state,
-      errorMessage: ''
+      ...initialState
     })
   ),
   on(
