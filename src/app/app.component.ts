@@ -19,15 +19,9 @@ export class AppComponent implements OnInit {
   constructor(private store: Store<State>) {}
 
   ngOnInit() {
-    // this.store.select(getCurrentUser).subscribe(user => {
-    //   localStorage.setItem('user', JSON.stringify(user));
-    //   return user;
-    // });
-    // console.log(this.userState$.subscribe(data => data));
     this.user = JSON.parse(localStorage.getItem('user'));
-    if (!!this.user.token) {
+    if (!!this.user) {
       localStorage.setItem('token', this.user.token);
-      console.log(this.user);
       this.store.dispatch(UserActions.getUserFromLocalStorage());
     }
   }

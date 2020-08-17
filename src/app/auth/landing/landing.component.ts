@@ -34,14 +34,10 @@ export class LandingComponent implements OnInit {
     this.error$ = this.store.select(getError);
   }
 
-  onClose() {
-    this.closeSidenavEvent.emit();
-  }
-
   logout(): void {
+    this.store.dispatch(UserActions.initAuth());
+    this.router.navigate(['/login']);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.router.navigate(['/login']);
-    this.store.dispatch(UserActions.initAuth());
   }
 }

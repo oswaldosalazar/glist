@@ -7,7 +7,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { State } from './../state/app.state';
-import { tap } from 'rxjs/operators';
+import { tap, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,8 @@ export class AuthService {
     Authorization: 'Bearer ' + localStorage.getItem('token')
   };
   sub: Subscription;
+  user$: Observable<User>;
+  // user$: Subscription;
 
   constructor(
     private http: HttpClient,
@@ -59,14 +61,9 @@ export class AuthService {
     });
   }
 
-  afterAuthentication(token) {
-    localStorage.setItem('token', token);
+  afterAuthentication(user) {
+    localStorage.setItem('token', user.token);
+    localStorage.setItem('user', JSON.stringify(user));
     this.router.navigate(['/landing']);
-    this.store
-      .select(getCurrentUser)
-      .subscribe(user => localStorage.setItem('user', JSON.stringify(user)));
-    // state => console.log(state)
-    // localStorage.setItem('state', JSON.stringify(state))
-    // );
   }
 }

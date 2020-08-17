@@ -16,29 +16,3 @@
   {{ currentUser$ | async | json }} is not logged in Status
   {{ currentUserStatus$ | async }}
 </ng-template>
-
-<mat-nav-list>
-  <a
-    *ngIf="!(currentUserStatus$ | async)"
-    mat-list-item
-    routerLink="/signup"
-    (click)="onClose()"
-  >
-    <mat-icon>face</mat-icon>
-    <span class="nav-caption" (click)="onClose()">Signup</span>
-  </a>
-  <a *ngIf="!(currentUserStatus$ | async)" mat-list-item routerLink="/login">
-    <mat-icon>login</mat-icon>
-    <span class="nav-caption" (click)="onClose()">Login</span>
-  </a>
-  <a *ngIf="currentUserStatus$ | async" mat-list-item routerLink="/training">
-    <mat-icon>fitness_center</mat-icon>
-    <span class="nav-caption" (click)="onClose()">Training</span>
-  </a>
-  <mat-list-item *ngIf="currentUserStatus$ | async">
-    <button mat-icon-button>
-      <mat-icon>eject</mat-icon>
-      <span class="nav-caption" (click)="logout()">Logout</span>
-    </button>
-  </mat-list-item>
-</mat-nav-list>
