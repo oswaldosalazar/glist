@@ -14,7 +14,7 @@ import * as UserActions from './auth/store/auth.actions';
 })
 export class AppComponent implements OnInit {
   title = 'glist';
-  // userState$: Observable<User>;
+  user: User;
 
   constructor(private store: Store<State>) {}
 
@@ -24,9 +24,11 @@ export class AppComponent implements OnInit {
     //   return user;
     // });
     // console.log(this.userState$.subscribe(data => data));
-    const user = JSON.parse(localStorage.getItem('user'));
-    localStorage.setItem('token', user.token);
-    console.log(user);
-    this.store.dispatch(UserActions.getUserFromLocalStorage());
+    this.user = JSON.parse(localStorage.getItem('user'));
+    if (!!this.user.token) {
+      localStorage.setItem('token', this.user.token);
+      console.log(this.user);
+      this.store.dispatch(UserActions.getUserFromLocalStorage());
+    }
   }
 }

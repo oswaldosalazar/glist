@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -22,6 +22,7 @@ export class LandingComponent implements OnInit {
   error$: Observable<string>;
   currentUserStatus$: Observable<boolean>;
   currentUser$: Observable<User>;
+  @Output() closeSidenavEvent = new EventEmitter<void>();
 
   constructor(private store: Store<State>, private router: Router) {
     this.currentUserStatus$ = this.store.select(getCurrentUserStatus);
@@ -31,6 +32,10 @@ export class LandingComponent implements OnInit {
     this.currentUser$ = this.store.select(getCurrentUser);
     this.currentUserStatus$ = this.store.select(getCurrentUserStatus);
     this.error$ = this.store.select(getError);
+  }
+
+  onClose() {
+    this.closeSidenavEvent.emit();
   }
 
   logout(): void {
