@@ -37,6 +37,11 @@ export const getCurrentUserStatus = createSelector(
   state => state.isLoggedIn
 );
 
+export const getCurrentUserName = createSelector(
+  getUserFeatureState,
+  state => state.user
+);
+
 export const authReducer = createReducer<UserState>(
   initialState,
   on(

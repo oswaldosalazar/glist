@@ -14,7 +14,7 @@
       <input
         matInput
         type="text"
-        placeholder="First Name (required)"
+        placeholder="First Name *"
         formControlName="firstName"
       />
     </mat-form-field>
@@ -32,7 +32,7 @@
       <input
         matInput
         type="email"
-        placeholder="Email (required)"
+        placeholder="Email *"
         formControlName="email"
       />
     </mat-form-field>
@@ -41,8 +41,9 @@
       <input
         matInput
         type="password"
-        placeholder="Password (required)"
+        placeholder="Password *"
         formControlName="password"
+        matTooltip="8 characters / 1 upper case / 1 lower case / 1 number / 1 symbol"
       />
     </mat-form-field>
 
@@ -54,6 +55,9 @@
     >
       Sign Up
     </button>
+    <div>
+      <a routerLink="/login"> or Login</a>
+    </div>
     <div [hidden]="true">
       {{ errorMessage$ | async }}
     </div>

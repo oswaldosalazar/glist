@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from './state/app.state';
-import { getCurrentUser } from './auth/store/auth.reducer';
 import { User } from './auth/models/user';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+
 import * as UserActions from './auth/store/auth.actions';
 
 @Component({

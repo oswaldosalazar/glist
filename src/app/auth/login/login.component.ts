@@ -19,7 +19,7 @@ import { tap, map } from 'rxjs/operators';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  pageTitle = 'Login';
+  pageTitle = 'GList Login';
   loginForm: FormGroup;
   // currentUser$: Observable<User>;
   errorMessage$: Observable<string>;

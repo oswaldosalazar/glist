@@ -10,7 +10,8 @@ import * as UserActions from '../store/auth.actions';
 import {
   getCurrentUser,
   getError,
-  getCurrentUserStatus
+  getCurrentUserStatus,
+  getCurrentUserName
 } from './../store/auth.reducer';
 
 @Component({
@@ -22,6 +23,7 @@ export class LandingComponent implements OnInit {
   error$: Observable<string>;
   currentUserStatus$: Observable<boolean>;
   currentUser$: Observable<User>;
+  currentUserName: string;
   @Output() closeSidenavEvent = new EventEmitter<void>();
 
   constructor(private store: Store<State>, private router: Router) {
@@ -29,8 +31,11 @@ export class LandingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentUser$ = this.store.select(getCurrentUser);
+    // this.currentUser$ = this.store.select(getCurrentUser);
+    // if(this.currentUser$) this.currentUserName = this.currentUser$.firstName
     this.currentUserStatus$ = this.store.select(getCurrentUserStatus);
+    this.currentUser$ = this.store.select(getCurrentUser);
+    console.log(this.currentUser$);
     this.error$ = this.store.select(getError);
   }
 

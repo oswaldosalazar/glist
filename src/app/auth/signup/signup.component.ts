@@ -18,7 +18,7 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  pageTitle = 'Sign Up';
+  pageTitle = 'GList Signup';
   signupForm: FormGroup;
   currentUser$: Observable<User>;
 
