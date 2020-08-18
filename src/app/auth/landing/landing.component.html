@@ -3,19 +3,21 @@
     <mat-toolbar-row>
       <span>GList</span>
       <span class="example-spacer"></span>
-      <button
-        mat-icon-button
-        [matMenuTriggerFor]="menu"
-        aria-label="Example icon-button with a menu"
-      >
-        <mat-icon>more_vert</mat-icon>
-        <mat-menu #menu="matMenu">
-          <button (click)="logout()" mat-menu-item>
-            <mat-icon>exit_to_app</mat-icon>
-            <span>Logout</span>
-          </button>
-        </mat-menu>
-      </button>
+      <div *ngIf="currentUserStatus$ | async">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>more_vert</mat-icon>
+          <mat-menu #menu="matMenu">
+            <button (click)="logout()" mat-menu-item>
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+        </button>
+      </div>
     </mat-toolbar-row>
   </mat-toolbar>
 </p>
@@ -24,7 +26,7 @@
     *ngIf="currentUserStatus$ | async; then thenTemplate; else elseTemplate"
   ></ng-container>
   <ng-template #thenTemplate>
-    {{ currentUser$ | async | json }} is logged in
+    {{ currentUserName$ | async }} is logged in
   </ng-template>
   <ng-template #elseTemplate>
     <button mat-button color="primary" routerLink="/login">

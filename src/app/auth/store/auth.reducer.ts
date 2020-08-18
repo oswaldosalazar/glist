@@ -39,7 +39,7 @@ export const getCurrentUserStatus = createSelector(
 
 export const getCurrentUserName = createSelector(
   getUserFeatureState,
-  state => state.user
+  state => state.user.firstName
 );
 
 export const authReducer = createReducer<UserState>(
@@ -49,7 +49,10 @@ export const authReducer = createReducer<UserState>(
     (state, action): UserState => ({
       ...state,
       isLoggedIn: true,
-      user: action.user,
+      user: {
+        token: action.user.token,
+        firstName: action.user.firstName
+      },
       errorMessage: ''
     })
   ),
@@ -67,7 +70,10 @@ export const authReducer = createReducer<UserState>(
     (state, action): UserState => ({
       ...state,
       isLoggedIn: true,
-      user: action.user,
+      user: {
+        token: action.user.token,
+        firstName: action.user.firstName
+      },
       errorMessage: ''
     })
   ),
@@ -89,7 +95,7 @@ export const authReducer = createReducer<UserState>(
   ),
   on(
     UserActions.getUserFromLocalStorage,
-    (state, action): UserState => ({
+    (state): UserState => ({
       ...state,
       isLoggedIn: true,
       user: JSON.parse(localStorage.getItem('user')),

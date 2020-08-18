@@ -21,7 +21,7 @@ export class AuthService {
     'Content-Type': 'application/json',
     Accept: 'application/json',
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-    Authorization: 'Bearer ' + localStorage.getItem('token')
+    Authorization: 'Bearer ' + this.getToken()
   };
   sub: Subscription;
   user$: Observable<User>;
@@ -34,7 +34,8 @@ export class AuthService {
   ) {}
 
   getToken(): string {
-    return localStorage.getItem('token');
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    if (user) return user.token;
   }
 
   signup(user: User): Observable<User> {
@@ -62,7 +63,7 @@ export class AuthService {
   }
 
   afterAuthentication(user) {
-    localStorage.setItem('token', user.token);
+    // localStorage.setItem('token', user.token);
     localStorage.setItem('user', JSON.stringify(user));
     this.router.navigate(['/landing']);
   }

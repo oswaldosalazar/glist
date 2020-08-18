@@ -38,7 +38,7 @@ export class AuthEffects {
       exhaustMap(action =>
         this.authService.signup(action.user).pipe(
           map(user => {
-            this.authService.afterAuthentication(user.token);
+            this.authService.afterAuthentication(user);
             return UserActions.signupUserSuccess({ user });
           }),
           catchError(error =>
