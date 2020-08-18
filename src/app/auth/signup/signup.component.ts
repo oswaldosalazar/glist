@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { User } from './../models/user';
-import { getCurrentUser, getError } from './../store/auth.reducer';
+import { getError } from './../store/auth.reducer';
 import { UIService } from './../../ui/ui.service';
 
 /* NgRx */
@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
 import { State } from './../../state/app.state';
 import * as UserActions from '../store/auth.actions';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup',
@@ -47,12 +47,6 @@ export class SignupComponent implements OnInit {
         ]
       ]
     });
-
-    // this.currentUser$ = this.store.select(getCurrentUser).pipe(
-    //   tap(user => {
-    //     console.log('CurrentUser from signup: ', user);
-    //   })
-    // );
 
     this.errorMessage$ = this.store.select(getError).pipe(
       map(error => {

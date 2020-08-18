@@ -24,14 +24,8 @@ export class AuthService {
     Authorization: 'Bearer ' + this.getToken()
   };
   sub: Subscription;
-  user$: Observable<User>;
-  // user$: Subscription;
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private store: Store<State>
-  ) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getToken(): string {
     const user: User = JSON.parse(localStorage.getItem('user'));
@@ -62,8 +56,7 @@ export class AuthService {
     });
   }
 
-  afterAuthentication(user) {
-    // localStorage.setItem('token', user.token);
+  afterAuthentication(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
     this.router.navigate(['/landing']);
   }

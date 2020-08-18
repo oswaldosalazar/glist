@@ -6,21 +6,18 @@ import { map, catchError, exhaustMap } from 'rxjs/operators';
 
 import { AuthService } from '../../auth/auth.service';
 import * as UserActions from './auth.actions';
+import { User } from '../models/user';
 
 @Injectable()
 export class AuthEffects {
-  constructor(
-    private actions$: Actions,
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private actions$: Actions, private authService: AuthService) {}
 
   loginUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.loginUser),
       exhaustMap(action =>
         this.authService.login(action.user).pipe(
-          map(user => {
+          map((user: User) => {
             this.authService.afterAuthentication(user);
             return UserActions.loginUserSuccess({ user });
           }),
@@ -37,7 +34,7 @@ export class AuthEffects {
       ofType(UserActions.signupUser),
       exhaustMap(action =>
         this.authService.signup(action.user).pipe(
-          map(user => {
+          map((user: User) => {
             this.authService.afterAuthentication(user);
             return UserActions.signupUserSuccess({ user });
           }),
