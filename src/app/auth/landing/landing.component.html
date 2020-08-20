@@ -27,6 +27,7 @@
   ></ng-container>
   <ng-template #thenTemplate>
     {{ currentUserName$ | async }} is logged in
+    <app-lists></app-lists>
   </ng-template>
   <ng-template #elseTemplate>
     <button mat-button color="primary" routerLink="/login">

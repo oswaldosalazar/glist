@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { ListsModule } from './../lists/lists.module';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
@@ -19,6 +20,7 @@ import { SharedModule } from '../shared.module';
     RouterModule,
     ReactiveFormsModule,
     SharedModule,
+    ListsModule,
     EffectsModule.forRoot([AuthEffects]),
     StoreModule.forFeature('currentUser', authReducer)
   ],

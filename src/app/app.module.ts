@@ -14,6 +14,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
 import { AuthModule } from './auth/auth.module';
+import { ListsModule } from './lists/lists.module';
 import { UIService } from './ui/ui.service';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { UIService } from './ui/ui.service';
       enabled: environment.production
     }),
     AuthModule,
+    ListsModule,
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       name: 'Glist',
