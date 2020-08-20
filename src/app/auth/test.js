@@ -1,3 +1,4 @@
+// Questions from Datava
 //a) What does the following print to the console log?
 //b) What is the correct way to handle the response from the post?
 var response = 'Nothing yet';
