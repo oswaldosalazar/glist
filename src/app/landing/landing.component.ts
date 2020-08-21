@@ -3,16 +3,16 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { User } from './../models/user';
-import { State } from '../../../app/state/app.state';
+import { User } from '../auth/models/user';
+import { State } from '../../app/state/app.state';
 
-import * as UserActions from '../store/auth.actions';
+import * as UserActions from '../auth/store/auth.actions';
 import {
   getCurrentUser,
   getError,
   getCurrentUserStatus,
   getCurrentUserName
-} from './../store/auth.reducer';
+} from '../auth/store/auth.reducer';
 
 @Component({
   selector: 'app-landing',
@@ -40,7 +40,6 @@ export class LandingComponent implements OnInit {
   logout(): void {
     this.store.dispatch(UserActions.initAuth());
     this.router.navigate(['/login']);
-    localStorage.removeItem('token');
     localStorage.removeItem('user');
   }
 }

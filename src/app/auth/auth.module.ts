@@ -8,7 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { ListsModule } from './../lists/lists.module';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
-import { LandingComponent } from './landing/landing.component';
+import { LandingComponent } from '../landing/landing.component';
 import { AuthEffects } from './store/auth.effects';
 import { authReducer } from '../auth/store/auth.reducer';
 import { SharedModule } from '../shared.module';

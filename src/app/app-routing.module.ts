@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
-import { LandingComponent } from './auth/landing/landing.component';
+import { LandingComponent } from './landing/landing.component';
 
 import { AuthGuard } from './auth/auth.guard';
 
