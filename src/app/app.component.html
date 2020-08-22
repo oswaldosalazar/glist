@@ -1,1 +1,23 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span class="icon-aligner"><mat-icon>shopping_cart</mat-icon></span>
+    <span class="spacer"></span>
+    <div *ngIf="currentUserStatus$ | async">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+        <mat-menu #menu="matMenu">
+          <button (click)="logout()" mat-menu-item>
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
 <router-outlet></router-outlet>
