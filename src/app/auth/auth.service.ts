@@ -60,4 +60,8 @@ export class AuthService {
     localStorage.setItem('user', JSON.stringify(user));
     this.router.navigate(['/landing']);
   }
+
+  getStatus() {
+    return this.http.get<any>(`${this.url}/auth/status`);
+  }
 }

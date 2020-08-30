@@ -34,3 +34,8 @@ export const initAuth = createAction('[User] Initialize Auth');
 export const getUserFromLocalStorage = createAction(
   '[User] Get User From Local Storage'
 );
+
+export const getStatus = createAction(
+  '[User] Get User Status',
+  props<{ token: string }>()
+);

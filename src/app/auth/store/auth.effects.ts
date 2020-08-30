@@ -49,4 +49,11 @@ export class AuthEffects {
       )
     );
   });
+
+  getStatus$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.getStatus),
+      exhaustMap(action => this.authService.getStatus())
+    );
+  });
 }
