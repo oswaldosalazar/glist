@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,12 @@ import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
 import { ListsModule } from './lists/lists.module';
 import { UIService } from './ui/ui.service';
+
+export function tokenGetter() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  console.log(user);
+  if (user) return user.token;
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +43,13 @@ import { UIService } from './ui/ui.service';
       name: 'Glist',
       maxAge: 25,
       logOnly: environment.production
+    }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:3000'],
+        disallowedRoutes: []
+      }
     })
   ],
   providers: [UIService],
