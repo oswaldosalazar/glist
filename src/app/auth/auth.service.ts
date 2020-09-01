@@ -13,17 +13,16 @@ import { tap, take } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  currentUser: User | null;
-  redirectUrl: string;
+  // currentUser: User | null;
+  // redirectUrl: string;
   url = 'http://localhost:3000';
-  headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-    Authorization: 'Bearer ' + this.getToken()
-  };
-  sub: Subscription;
+  // headers = {
+  //   'Access-Control-Allow-Origin': '*',
+  //   'Content-Type': 'application/json',
+  //   Accept: 'application/json',
+  //   'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
+  // };
+  // sub: Subscription;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -40,9 +39,13 @@ export class AuthService {
       passwd: user.password
     };
 
-    return this.http.post<User>(`${this.url}/auth/signup`, body, {
-      headers: this.headers
-    });
+    return this.http.post<User>(
+      `${this.url}/auth/signup`,
+      body
+      // , {
+      //   headers: this.headers
+      // }
+    );
   }
 
   login(user: User): Observable<User> {
@@ -51,9 +54,13 @@ export class AuthService {
       passwd: user.password
     };
 
-    return this.http.post<User>(`${this.url}/auth/login`, body, {
-      headers: this.headers
-    });
+    return this.http.post<User>(
+      `${this.url}/auth/login`,
+      body
+      // , {
+      //   headers: this.headers
+      // }
+    );
   }
 
   afterAuthentication(user: User) {
