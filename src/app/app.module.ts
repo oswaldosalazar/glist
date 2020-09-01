@@ -17,6 +17,7 @@ import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
 import { ListsModule } from './lists/lists.module';
 import { UIService } from './ui/ui.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export function tokenGetter() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -25,7 +26,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

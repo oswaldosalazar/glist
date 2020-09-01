@@ -11,6 +11,6 @@ export class ListsComponent implements OnInit {
   constructor(private listsService: ListsService) {}
 
   ngOnInit(): void {
-    this.listsService.addList().subscribe(data => console.log(data));
+    // this.listsService.addList().subscribe(data => console.log(data));
   }
 }
