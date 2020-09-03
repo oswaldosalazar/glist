@@ -29,6 +29,7 @@ export class ListsComponent implements OnInit {
   onSubmit(): void {
     const newListName = this.createListForm.value;
     console.log(newListName);
+    this.createListForm.reset();
     // this.store.dispatch(UserActions.loginUser({ user }));
   }
 }
