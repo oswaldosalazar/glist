@@ -2,6 +2,7 @@
   <mat-toolbar-row>
     <span class="icon-aligner"><mat-icon>shopping_cart</mat-icon></span>
     <span class="spacer"></span>
+    <span>{{ currentUserName$ | async }}</span>
     <div *ngIf="currentUserStatus$ | async">
       <button
         mat-icon-button
