@@ -1,1 +1,28 @@
-<p>list works!</p>
+<section class="login-form">
+  <form
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="15px"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="createItemForm"
+    autocomplete="off"
+  >
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        placeholder="Add Item Name"
+        formControlName="itemName"
+      />
+    </mat-form-field>
+
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="createItemForm.invalid"
+    >
+      Create List
+    </button>
+  </form>
+</section>

@@ -21,7 +21,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 export function tokenGetter() {
   const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user);
   if (user) return user.token;
 }
 

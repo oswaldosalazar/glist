@@ -7,6 +7,15 @@ import { HttpClient } from '@angular/common/http';
 export class ListsService {
   url = 'http://localhost:3000';
 
+  private _isListActive: boolean;
+
+  public get isListActive(): boolean {
+    return this._isListActive;
+  }
+  public set isListActive(value: boolean) {
+    this._isListActive = value;
+  }
+
   constructor(private http: HttpClient) {}
 
   addList() {
@@ -26,4 +35,12 @@ export class ListsService {
       // }
     );
   }
+
+  // get isListActive(): boolean {
+  //   return this.isListActive;
+  // }
+
+  // set isListActive(val: boolean) {
+  //   this.isListActive = val;
+  // }
 }

@@ -1,4 +1,4 @@
-<section class="login-form">
+<section *ngIf="!showList" class="login-form">
   <form
     fxLayout="column"
     fxLayoutAlign="center center"
@@ -25,7 +25,8 @@
       color="primary"
       [disabled]="createListForm.invalid"
     >
-      Create List
+      Add Item
     </button>
   </form>
 </section>
+<app-list *ngIf="showList"></app-list>
