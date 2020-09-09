@@ -53,7 +53,7 @@ export class AppComponent implements OnInit, AfterContentChecked {
 
   logout(): void {
     this.store.dispatch(UserActions.initAuth());
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
     localStorage.removeItem('user');
   }
 
