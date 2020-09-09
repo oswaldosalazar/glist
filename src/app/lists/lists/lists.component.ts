@@ -31,7 +31,7 @@ export class ListsComponent implements OnInit {
     const newListName = this.createListForm.value;
     console.log(newListName);
     this.createListForm.reset();
-    this.router.navigate(['list']);
+    this.router.navigate(['/list']);
     // this.store.dispatch(UserActions.loginUser({ user }));
   }
 }
