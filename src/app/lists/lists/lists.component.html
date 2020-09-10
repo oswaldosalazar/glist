@@ -1,4 +1,4 @@
-<section *ngIf="!showList" class="login-form">
+<section *ngIf="!showList" class="lists">
   <form
     fxLayout="column"
     fxLayoutAlign="center center"
@@ -24,9 +24,10 @@
       mat-raised-button
       color="primary"
       [disabled]="createListForm.invalid"
+      routerLink="/list"
     >
-      Add Item
+      Add New List
     </button>
   </form>
 </section>
-<app-list *ngIf="showList"></app-list>
+<!-- <app-list *ngIf="showList"></app-list> -->

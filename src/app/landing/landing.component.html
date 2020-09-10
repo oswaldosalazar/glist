@@ -1,15 +1,17 @@
-<div class="landing">
+<div>
   <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
-    <ng-container
-      *ngIf="currentUserStatus$ | async; then thenTemplate; else elseTemplate"
+    <div>
+      <div *ngIf="!currentUserStatus$">
+        <a mat-button color="primary" routerLink="/auth/login"> Login </a>
+        <div>or</div>
+        <a mat-button color="primary" routerLink="/auth/signup">Signup</a>
+      </div>
+    </div>
+    <!-- <ng-container
+      *ngIf="!currentUserStatus$ | async; then thenTemplate; else elseTemplate"
     ></ng-container>
-    <ng-template #thenTemplate>
-      <app-lists></app-lists>
-    </ng-template>
+    <ng-template #thenTemplate> </ng-template>
     <ng-template #elseTemplate>
-      <a mat-button color="primary" routerLink="/auth/login"> Login </a>
-      <div>or</div>
-      <a mat-button color="primary" routerLink="/auth/signup">Signup</a>
-    </ng-template>
+    </ng-template> -->
   </div>
 </div>

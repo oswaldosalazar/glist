@@ -5,6 +5,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { LandingComponent } from './landing/landing.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ListComponent } from './lists/list/list.component';
+import { ListsComponent } from './lists/lists/lists.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 
@@ -23,6 +24,7 @@ const routes: Routes = [
     ]
   },
   { path: 'list', component: ListComponent },
+  { path: 'lists', component: ListsComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

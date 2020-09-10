@@ -65,7 +65,7 @@ export class AuthService {
 
   afterAuthentication(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
-    this.router.navigate(['/landing']);
+    this.router.navigate(['/lists']);
   }
 
   getStatus() {
