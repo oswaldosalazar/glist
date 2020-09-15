@@ -24,7 +24,7 @@ export class ListsComponent implements OnInit {
     this.showList = false;
     this.listsService.isListActive = false;
     this.createListForm = this.fb.group({
-      listName: ['', [Validators.required]]
+      name: ['', [Validators.required]]
     });
 
     // this.listsService.addList().subscribe(data => console.log(data));
@@ -32,11 +32,15 @@ export class ListsComponent implements OnInit {
 
   onSubmit(): void {
     const newListName = this.createListForm.value;
-    console.log(newListName);
     this.createListForm.reset();
     this.showList = true;
     this.router.navigate(['/list']);
+    this.sendListName(newListName);
 
     // this.store.dispatch(UserActions.loginUser({ user }));
+  }
+
+  sendListName(listName): void {
+    this.listsService.sendListName(listName);
   }
 }

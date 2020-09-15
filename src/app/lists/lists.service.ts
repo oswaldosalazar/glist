@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,9 @@ import { HttpClient } from '@angular/common/http';
 export class ListsService {
   url = 'http://localhost:3000';
 
-  private _isListActive: boolean;
+  private subject = new BehaviorSubject<any>({});
 
+  private _isListActive: boolean;
   public get isListActive(): boolean {
     return this._isListActive;
   }
@@ -36,11 +38,15 @@ export class ListsService {
     );
   }
 
-  // get isListActive(): boolean {
-  //   return this.isListActive;
-  // }
+  sendListName(list: any) {
+    this.subject.next({ list });
+  }
 
-  // set isListActive(val: boolean) {
-  //   this.isListActive = val;
-  // }
+  clearListName() {
+    this.subject.next({});
+  }
+
+  onListName(): Observable<any> {
+    return this.subject.asObservable();
+  }
 }
