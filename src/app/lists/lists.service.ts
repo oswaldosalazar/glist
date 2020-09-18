@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class ListsService {
   url = 'http://localhost:3000';
 
-  private subject = new BehaviorSubject<any>({});
+  private subject = new BehaviorSubject<any>('');
 
   private _isListActive: boolean;
   public get isListActive(): boolean {
@@ -38,12 +38,12 @@ export class ListsService {
     );
   }
 
-  sendListName(list: any) {
-    this.subject.next({ list });
+  sendListName(name: string) {
+    this.subject.next(name);
   }
 
   clearListName() {
-    this.subject.next({});
+    this.subject.next('');
   }
 
   onListName(): Observable<any> {

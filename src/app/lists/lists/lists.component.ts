@@ -31,16 +31,14 @@ export class ListsComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const newListName = this.createListForm.value;
+    const newListName = this.createListForm.value.name;
     this.createListForm.reset();
     this.showList = true;
     this.router.navigate(['/list']);
     this.sendListName(newListName);
-
-    // this.store.dispatch(UserActions.loginUser({ user }));
   }
 
-  sendListName(listName): void {
-    this.listsService.sendListName(listName);
+  sendListName(name): void {
+    this.listsService.sendListName(name);
   }
 }

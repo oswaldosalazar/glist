@@ -12,33 +12,28 @@ export class ListComponent implements OnInit, OnDestroy {
   pageTitle = 'Add Item';
   showLists: boolean;
   createItemForm: FormGroup;
-  list = {};
-  listName: string;
+  list: string[] = [];
+  name: string;
   subscription: Subscription;
 
   constructor(private fb: FormBuilder, private listsService: ListsService) {
-    this.subscription = this.listsService.onListName().subscribe(listName => {
-      console.log('constructor listName: ', listName);
-      this.listName = listName;
-    });
+    this.subscription = this.listsService
+      .onListName()
+      .subscribe(name => (this.name = name));
   }
 
   ngOnInit(): void {
     this.createItemForm = this.fb.group({
-      itemName: ['', [Validators.required]]
+      item: ['', [Validators.required]]
     });
     this.listsService.isListActive = true;
-    console.log(this.listName);
   }
 
   onSubmit(): void {
-    const newListName = this.createItemForm.value;
-    console.log(newListName);
+    const item = this.createItemForm.value.item;
+    this.list.push(item);
     this.createItemForm.reset();
-
-    // this.router.navigate(['/list']);
-
-    // this.store.dispatch(UserActions.loginUser({ user }));
+    console.log(this.list);
   }
 
   ngOnDestroy(): void {

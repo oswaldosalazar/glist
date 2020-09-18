@@ -1,6 +1,7 @@
+<h2>{{ name }}</h2>
 <section class="list">
   <form
-    fxLayout="column"
+    fxLayout="row"
     fxLayoutAlign="center center"
     fxLayoutGap="15px"
     (ngSubmit)="onSubmit()"
@@ -11,8 +12,8 @@
       <input
         matInput
         type="text"
-        placeholder="Add Item Name"
-        formControlName="itemName"
+        placeholder="Add Item"
+        formControlName="item"
       />
     </mat-form-field>
 
@@ -26,3 +27,4 @@
     </button>
   </form>
 </section>
+<h1>{{ list | json }}</h1>
