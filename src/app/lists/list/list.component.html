@@ -27,4 +27,37 @@
     </button>
   </form>
 </section>
-<h1>{{ list | json }}</h1>
+
+<div *ngIf="pendingItems.length" class="example-container">
+  <h2>Pending</h2>
+
+  <div
+    cdkDropList
+    id="pending-items"
+    [cdkDropListData]="pendingItems"
+    [cdkDropListConnectedTo]="['picked-items']"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="example-box" *ngFor="let item of pendingItems" cdkDrag>
+      {{ item }}
+    </div>
+  </div>
+</div>
+
+<div class="example-container">
+  <h2>Picked</h2>
+
+  <div
+    cdkDropList
+    id="picked-items"
+    [cdkDropListData]="pickedItems"
+    [cdkDropListConnectedTo]="['pending-items']"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="example-box" *ngFor="let item of pickedItems" cdkDrag>
+      {{ item }}
+    </div>
+  </div>
+</div>

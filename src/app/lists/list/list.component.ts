@@ -2,6 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ListsService } from '../lists.service';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-list',
@@ -12,7 +17,8 @@ export class ListComponent implements OnInit, OnDestroy {
   pageTitle = 'Add Item';
   showLists: boolean;
   createItemForm: FormGroup;
-  list: string[] = [];
+  pendingItems: string[] = ['item1', 'item2', 'item 3'];
+  pickedItems: string[] = [];
   name: string;
   subscription: Subscription;
 
@@ -31,9 +37,26 @@ export class ListComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     const item = this.createItemForm.value.item;
-    this.list.push(item);
+    this.pendingItems.push(item);
     this.createItemForm.reset();
-    console.log(this.list);
+    console.log(this.pendingItems);
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 
   ngOnDestroy(): void {
