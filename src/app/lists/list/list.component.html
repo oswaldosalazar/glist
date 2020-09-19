@@ -1,5 +1,5 @@
-<h2>{{ name }}</h2>
 <section class="list">
+  <h3>{{ name }}</h3>
   <form
     fxLayout="row"
     fxLayoutAlign="center center"
@@ -19,45 +19,50 @@
 
     <button
       type="submit"
-      mat-raised-button
+      mat-mini-fab
       color="primary"
       [disabled]="createItemForm.invalid"
     >
-      Add New Item
+      <mat-icon>add</mat-icon>
     </button>
   </form>
 </section>
 
-<div *ngIf="pendingItems.length + pickedItems.length" class="example-container">
-  <h2>Pending</h2>
-
+<div class="lists-container">
   <div
-    cdkDropList
-    id="pending-items"
-    [cdkDropListData]="pendingItems"
-    [cdkDropListConnectedTo]="['picked-items']"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)"
+    *ngIf="pendingItems.length + pickedItems.length"
+    class="example-container"
   >
-    <div class="example-box" *ngFor="let item of pendingItems" cdkDrag>
-      {{ item }}
+    <h4>Pending</h4>
+
+    <div
+      cdkDropList
+      id="pending-items"
+      [cdkDropListData]="pendingItems"
+      [cdkDropListConnectedTo]="['picked-items']"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="example-box" *ngFor="let item of pendingItems" cdkDrag>
+        {{ item }}
+      </div>
     </div>
   </div>
-</div>
 
-<div class="example-container">
-  <h2>Picked</h2>
+  <div class="example-container">
+    <h4>Picked</h4>
 
-  <div
-    cdkDropList
-    id="picked-items"
-    [cdkDropListData]="pickedItems"
-    [cdkDropListConnectedTo]="['pending-items']"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)"
-  >
-    <div class="example-box" *ngFor="let item of pickedItems" cdkDrag>
-      {{ item }}
+    <div
+      cdkDropList
+      id="picked-items"
+      [cdkDropListData]="pickedItems"
+      [cdkDropListConnectedTo]="['pending-items']"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="example-box" *ngFor="let item of pickedItems" cdkDrag>
+        {{ item }}
+      </div>
     </div>
   </div>
 </div>
