@@ -56,6 +56,8 @@ export class ListComponent implements OnInit, OnDestroy {
         event.previousIndex,
         event.currentIndex
       );
+      console.log('pending: ', this.pendingItems);
+      console.log('picked: ', this.pickedItems);
     }
   }
 
