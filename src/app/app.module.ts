@@ -17,6 +17,7 @@ import { AuthModule } from './auth/auth.module';
 import { ListsModule } from './lists/lists.module';
 import { UIService } from './ui/ui.service';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 export function tokenGetter() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -24,7 +25,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent],
+  declarations: [AppComponent, NotFoundComponent, ToolbarComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
