@@ -1,15 +1,13 @@
 <section *ngIf="!showList" class="lists">
+  <h3>{{ pageTitle }}</h3>
   <form
-    fxLayout="column"
+    fxLayout="row"
     fxLayoutAlign="center center"
     fxLayoutGap="15px"
     (ngSubmit)="onSubmit()"
     [formGroup]="createListForm"
     autocomplete="off"
   >
-    <h3>
-      {{ pageTitle }}
-    </h3>
     <mat-form-field>
       <input
         matInput
@@ -21,12 +19,12 @@
 
     <button
       type="submit"
-      mat-raised-button
+      mat-mini-fab
       color="primary"
       [disabled]="createListForm.invalid"
       routerLink="/list"
     >
-      Add New List
+      <mat-icon>add_shopping_cart</mat-icon>
     </button>
   </form>
 </section>
