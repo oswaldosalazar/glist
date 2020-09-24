@@ -8,6 +8,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class ListsService {
   url = 'http://localhost:3000';
 
+  pendingItems: string[] = [];
+  pickedItems: string[] = [];
+
   private subject = new BehaviorSubject<any>('');
 
   private _isListActive: boolean;
@@ -48,5 +51,21 @@ export class ListsService {
 
   onListName(): Observable<any> {
     return this.subject.asObservable();
+  }
+
+  addToPending(item: string) {
+    this.pendingItems.push(item);
+  }
+
+  addToPicked(item: string) {
+    this.pickedItems.push(item);
+  }
+
+  getPendingItems() {
+    return this.pendingItems;
+  }
+
+  getPickedItems() {
+    return this.pickedItems;
   }
 }

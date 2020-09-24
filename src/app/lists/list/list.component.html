@@ -28,13 +28,9 @@
   </form>
 </section>
 
-<div class="lists-container">
-  <div
-    *ngIf="pendingItems.length + pickedItems.length"
-    class="example-container"
-  >
+<div *ngIf="pendingItems.length + pickedItems.length" class="lists-container">
+  <div class="example-container">
     <h4>Pending</h4>
-
     <div
       cdkDropList
       id="pending-items"

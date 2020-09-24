@@ -17,8 +17,8 @@ export class ListComponent implements OnInit, OnDestroy {
   pageTitle = 'Add Item';
   showLists: boolean;
   createItemForm: FormGroup;
-  pendingItems: string[] = ['item1', 'item2', 'item 3'];
-  pickedItems: string[] = [];
+  pendingItems: string[];
+  pickedItems: string[];
   name: string;
   subscription: Subscription;
 
@@ -33,13 +33,15 @@ export class ListComponent implements OnInit, OnDestroy {
       item: ['', [Validators.required]]
     });
     this.listsService.isListActive = true;
+    this.pendingItems = this.listsService.getPendingItems();
+    this.pickedItems = this.listsService.getPickedItems();
   }
 
   onSubmit(): void {
     const item = this.createItemForm.value.item;
-    this.pendingItems.push(item);
+    this.listsService.pendingItems.push(item);
     this.createItemForm.reset();
-    console.log(this.pendingItems);
+    console.log(this.listsService.pendingItems);
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -57,8 +59,8 @@ export class ListComponent implements OnInit, OnDestroy {
         event.currentIndex
       );
     }
-    console.log('pending: ', this.pendingItems);
-    console.log('picked: ', this.pickedItems);
+    console.log('pending: ', this.listsService.pendingItems);
+    console.log('picked: ', this.listsService.pickedItems);
   }
 
   ngOnDestroy(): void {
