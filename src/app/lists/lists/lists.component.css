@@ -1,6 +1,18 @@
-.lists {
+.lists-input {
   padding-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+mat-card {
+  width: 320px;
+}
+
+.list-icon {
+  padding-right: 30px;
+}
+
+.lists {
+  padding-top: 20px;
 }

@@ -1,4 +1,4 @@
-<section *ngIf="!showList" class="lists">
+<section class="lists-input">
   <h3>{{ pageTitle }}</h3>
   <form
     fxLayout="row"
@@ -22,10 +22,25 @@
       mat-mini-fab
       color="primary"
       [disabled]="createListForm.invalid"
-      routerLink="/list"
     >
       <mat-icon>add_shopping_cart</mat-icon>
     </button>
   </form>
+  <div *ngIf="name" class="lists">
+    <mat-card fxLayout="row" fxLayoutAlign="space-between center">
+      <div>
+        <a (click)="onClick()">{{ name }}</a>
+      </div>
+      <div fxLayout="row">
+        <div class="list-icon">
+          <a href=""><mat-icon>list</mat-icon></a>
+        </div>
+        <div>
+          <a href=""><mat-icon>delete</mat-icon></a>
+        </div>
+      </div>
+    </mat-card>
+  </div>
 </section>
+<!-- routerLink="/list" -->
 <!-- <app-list *ngIf="showList"></app-list> -->

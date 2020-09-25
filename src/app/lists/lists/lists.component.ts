@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 export class ListsComponent implements OnInit {
   pageTitle = 'Add List';
   createListForm: FormGroup;
-  showList: boolean;
+  // showList: boolean;
+  name: string = null;
 
   constructor(
     private listsService: ListsService,
@@ -21,7 +22,7 @@ export class ListsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.showList = false;
+    // this.showList = false;
     this.listsService.isListActive = false;
     this.createListForm = this.fb.group({
       name: ['', [Validators.required]]
@@ -31,11 +32,14 @@ export class ListsComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const newListName = this.createListForm.value.name;
+    this.name = this.createListForm.value.name;
     this.createListForm.reset();
-    this.showList = true;
+    // this.showList = true;
+    this.sendListName(this.name);
+  }
+
+  onClick() {
     this.router.navigate(['/list']);
-    this.sendListName(newListName);
   }
 
   sendListName(name): void {
