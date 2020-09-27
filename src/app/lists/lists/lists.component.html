@@ -26,21 +26,21 @@
       <mat-icon>add_shopping_cart</mat-icon>
     </button>
   </form>
-  <div *ngIf="name" class="lists">
-    <mat-card fxLayout="row" fxLayoutAlign="space-between center">
-      <div>
-        <a (click)="onClick()">{{ name }}</a>
-      </div>
-      <div fxLayout="row">
-        <div class="list-icon">
-          <a href=""><mat-icon>list</mat-icon></a>
-        </div>
+  <div *ngIf="lists.length">
+    <div *ngFor="let list of lists" class="list-card">
+      <mat-card fxLayout="row" fxLayoutAlign="space-between center">
         <div>
-          <a href=""><mat-icon>delete</mat-icon></a>
+          {{ list }}
         </div>
-      </div>
-    </mat-card>
+        <div fxLayout="row">
+          <div class="list-icon">
+            <a (click)="onClick(list)"><mat-icon>list</mat-icon></a>
+          </div>
+          <div>
+            <a><mat-icon>delete</mat-icon></a>
+          </div>
+        </div>
+      </mat-card>
+    </div>
   </div>
 </section>
-<!-- routerLink="/list" -->
-<!-- <app-list *ngIf="showList"></app-list> -->
