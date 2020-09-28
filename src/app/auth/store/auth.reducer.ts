@@ -51,7 +51,8 @@ export const authReducer = createReducer<UserState>(
       isLoggedIn: true,
       user: {
         token: action.user.token,
-        firstName: action.user.firstName
+        firstName: action.user.firstName,
+        id: action.user.id
       },
       errorMessage: ''
     })
@@ -72,7 +73,8 @@ export const authReducer = createReducer<UserState>(
       isLoggedIn: true,
       user: {
         token: action.user.token,
-        firstName: action.user.firstName
+        firstName: action.user.firstName,
+        id: action.user.id
       },
       errorMessage: ''
     })

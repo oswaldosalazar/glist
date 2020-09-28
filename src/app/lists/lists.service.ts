@@ -23,12 +23,12 @@ export class ListsService {
 
   constructor(private http: HttpClient) {}
 
-  addList() {
+  addList(name, picked_items, pending_items) {
     const body = {
       user_id: 1,
-      name: 'list5',
-      picked_items: ['item1', 'item2'],
-      pending_items: ['item3'],
+      name,
+      picked_items,
+      pending_items,
       shared_with: [2]
     };
 

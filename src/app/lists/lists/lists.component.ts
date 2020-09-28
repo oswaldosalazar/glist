@@ -32,6 +32,7 @@ export class ListsComponent implements OnInit {
 
   onSubmit(): void {
     this.name = this.createListForm.value.name;
+    console.log(localStorage.getItem('user'));
     this.lists.push(this.name);
     this.createListForm.reset();
   }
