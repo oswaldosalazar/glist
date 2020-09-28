@@ -26,15 +26,15 @@ export class ListsComponent implements OnInit {
     this.createListForm = this.fb.group({
       name: ['', [Validators.required]]
     });
-
-    // this.listsService.addList().subscribe(data => console.log(data));
   }
 
   onSubmit(): void {
     this.name = this.createListForm.value.name;
-    console.log(localStorage.getItem('user'));
     this.lists.push(this.name);
     this.createListForm.reset();
+    this.listsService
+      .addList(this.name, [], [])
+      .subscribe(data => console.log(data));
   }
 
   onClick(list) {

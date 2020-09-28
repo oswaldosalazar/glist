@@ -24,8 +24,9 @@ export class ListsService {
   constructor(private http: HttpClient) {}
 
   addList(name, picked_items, pending_items) {
+    const user = JSON.parse(localStorage.getItem('user'));
     const body = {
-      user_id: 1,
+      user_id: user.id,
       name,
       picked_items,
       pending_items,
